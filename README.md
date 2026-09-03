@@ -1,4 +1,5 @@
-# TVS Credit EPIC 8 — Dynamic Residual Pricing & Lending Strategy Engine
+#FinLe - Lending Intelligence & Finance
+# Dynamic Residual Pricing & Lending Strategy Engine
 
 Full-stack deliverable for the "Disruption Decoded" Analytics Case Study.
 
