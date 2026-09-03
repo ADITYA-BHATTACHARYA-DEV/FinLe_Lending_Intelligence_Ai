@@ -1,0 +1,75 @@
+{
+  "total_agreements": 15000,
+  "portfolio_residual_risk_score": 35.79,
+  "avg_recovery_ratio": 0.393,
+  "avg_ltv_current": 0.865,
+  "avg_ltv_recommended": 0.56,
+  "avg_rate_current": 24.86,
+  "avg_rate_recommended": 27.73,
+  "avg_tenure_current": 34.3,
+  "avg_tenure_recommended": 32.5,
+  "total_loan_amount": 1472867646.0,
+  "total_predicted_recovery": 669569311.0,
+  "total_expected_loss": 221816788.0,
+  "avg_profitability_score": 13.25,
+  "risk_band_distribution": {
+    "Low": 3131,
+    "Medium": 9913,
+    "High": 1761,
+    "Critical": 195
+  },
+  "fuel_type_distribution": [
+    {
+      "Asset Fuel Type": "EV",
+      "agreements": 306,
+      "avg_recovery_ratio": 0.428
+    },
+    {
+      "Asset Fuel Type": "Petrol",
+      "agreements": 14694,
+      "avg_recovery_ratio": 0.392
+    }
+  ],
+  "top_risk_segments": [
+    {
+      "asset_model": "NTORQ",
+      "avg_residual_risk_score": 40.295,
+      "avg_recovery_ratio": 0.371,
+      "avg_health_index": 78.215,
+      "agreements": 2401
+    },
+    {
+      "asset_model": "RAIDER",
+      "avg_residual_risk_score": 39.588,
+      "avg_recovery_ratio": 0.368,
+      "avg_health_index": 80.77,
+      "agreements": 2494
+    },
+    {
+      "asset_model": "SPORT",
+      "avg_residual_risk_score": 38.315,
+      "avg_recovery_ratio": 0.347,
+      "avg_health_index": 77.795,
+      "agreements": 1081
+    },
+    {
+      "asset_model": "RONIN",
+      "avg_residual_risk_score": 37.343,
+      "avg_recovery_ratio": 0.383,
+      "avg_health_index": 85.766,
+      "agreements": 92
+    },
+    {
+      "asset_model": "APACHE",
+      "avg_residual_risk_score": 35.675,
+      "avg_recovery_ratio": 0.399,
+      "avg_health_index": 80.075,
+      "agreements": 2190
+    }
+  ],
+  "risk_weights": {
+    "w1_asset_risk": 0.4,
+    "w2_loan_risk": 0.35,
+    "w3_market_volatility": 0.25
+  }
+}

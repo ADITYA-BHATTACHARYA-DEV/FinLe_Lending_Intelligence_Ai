@@ -1,0 +1,62 @@
+[
+  {
+    "feature": "Asset Age Months At Seizure",
+    "importance": 0.753
+  },
+  {
+    "feature": "Cust State",
+    "importance": 0.3321
+  },
+  {
+    "feature": "Tenure",
+    "importance": 0.3123
+  },
+  {
+    "feature": "LTV",
+    "importance": 0.2824
+  },
+  {
+    "feature": "Asset Model",
+    "importance": 0.2237
+  },
+  {
+    "feature": "Cust Region",
+    "importance": 0.1682
+  },
+  {
+    "feature": "Asset Variant",
+    "importance": 0.1488
+  },
+  {
+    "feature": "Market_Volatility_Score",
+    "importance": 0.1462
+  },
+  {
+    "feature": "RC Availability",
+    "importance": 0.131
+  },
+  {
+    "feature": "Months Spent In Yard",
+    "importance": 0.108
+  },
+  {
+    "feature": "Cust Net IRR",
+    "importance": 0.0984
+  },
+  {
+    "feature": "Asset Accident Flag",
+    "importance": 0.0835
+  },
+  {
+    "feature": "Segment_Risk_Index",
+    "importance": 0.0782
+  },
+  {
+    "feature": "App Score Risk",
+    "importance": 0.0641
+  },
+  {
+    "feature": "Registration Flag",
+    "importance": 0.0641
+  }
+]

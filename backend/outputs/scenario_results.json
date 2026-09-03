@@ -1,0 +1,37 @@
+[
+  {
+    "scenario": "Baseline",
+    "avg_recovery_ratio": 0.392,
+    "avg_residual_risk_score": 43.53,
+    "critical_pct": 3.01,
+    "portfolio_value_at_risk": 0.0
+  },
+  {
+    "scenario": "Fuel Price Spike (+20%)",
+    "avg_recovery_ratio": 0.353,
+    "avg_residual_risk_score": 43.6,
+    "critical_pct": 3.02,
+    "portfolio_value_at_risk": 67448305.0
+  },
+  {
+    "scenario": "EV Adoption Surge (+15pp)",
+    "avg_recovery_ratio": 0.344,
+    "avg_residual_risk_score": 43.61,
+    "critical_pct": 3.03,
+    "portfolio_value_at_risk": 83133177.0
+  },
+  {
+    "scenario": "High Inflation (+10%)",
+    "avg_recovery_ratio": 0.382,
+    "avg_residual_risk_score": 43.56,
+    "critical_pct": 3.05,
+    "portfolio_value_at_risk": 18083159.0
+  },
+  {
+    "scenario": "Combined Stress",
+    "avg_recovery_ratio": 0.325,
+    "avg_residual_risk_score": 43.65,
+    "critical_pct": 3.04,
+    "portfolio_value_at_risk": 115130434.0
+  }
+]

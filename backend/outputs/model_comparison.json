@@ -1,0 +1,32 @@
+{
+  "value_models": [
+    {
+      "model": "LightGBM (ML)",
+      "rmse": 8515.0,
+      "mae": 6404.0,
+      "mape": 0.1695
+    },
+    {
+      "model": "Neural Network (DL)",
+      "rmse": 9282.0,
+      "mae": 7023.0,
+      "mape": 0.1818
+    },
+    {
+      "model": "Ensemble (ML+DL)",
+      "rmse": 8674.0,
+      "mae": 6538.0,
+      "mape": 0.1715
+    }
+  ],
+  "risk_model": {
+    "auc_roc": 0.827,
+    "precision": 0.746,
+    "recall": 0.715,
+    "algorithm": "CatBoost"
+  },
+  "stage1_origination": {
+    "mae_median_lambda": 0.02513,
+    "coverage_80pct": 0.763
+  }
+}
