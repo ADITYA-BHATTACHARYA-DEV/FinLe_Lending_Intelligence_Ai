@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="TVS Credit EPIC 8 — Residual Pricing & Lending Intelligence"
+  />
+
+  <title>EPIC 8 | Residual Pricing & Lending Intelligence</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
+        <div class="brand-mark">
+          EPIC<span>8</span>
+        </div>
+
+        <div class="brand-sub">
+          CREDIT INTELLIGENCE
+        </div>
+      </div>
+
+      <div class="sidebar-market-status">
+        <span class="market-dot"></span>
+
+        <div>
+          <strong>MARKET OPEN</strong>
+          <small>Portfolio monitoring live</small>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+
+        <button
+          class="nav-item active"
+          data-view="dashboard"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 13h8V3H3v10Zm0 8h8v-6H3v6Zm10 0h8V11h-8v10Zm0-18v6h8V3h-8Z"/>
+          </svg>
+
+          <span>Dashboard</span>
+          <kbd>01</kbd>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="explorer"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 4H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-10l-2-2Zm10 14H4V10h16v8Z"/>
+          </svg>
+
+          <span>Agreement Explorer</span>
+          <kbd>02</kbd>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="scenario"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 17h4v4H3v-4Zm7-7h4v11h-4V10Zm7-7h4v18h-4V3ZM4 15l5-6 4 3 6-8 1.5 1.2-7 9-4-3-4 5L4 15Z"/>
+          </svg>
+
+          <span>Scenario Lab</span>
+          <kbd>03</kbd>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="chat"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a9 9 0 0 0-9 9c0 2.1.72 4.04 1.93 5.58L3.2 21.2a.7.7 0 0 0 .73.73l4.62-1.73A8.96 8.96 0 0 0 12 20a9 9 0 1 0 0-18Zm-4 8.25h8a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1 0-1.5Zm0 3h5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1 0-1.5Z"/>
+          </svg>
+
+          <span>AI Lending Copilot</span>
+          <kbd>04</kbd>
+        </button>
+
+      </nav>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-system">
+
+        <div class="system-label">
+          SYSTEM
+        </div>
+
+        <div class="status-pill" id="ollamaStatus">
+          <span class="dot"></span>
+          <span>Checking AI...</span>
+        </div>
+
+        <div class="system-row">
+          <span>MODEL</span>
+          <strong>EPIC-RISK-V1</strong>
+        </div>
+
+        <div class="system-row">
+          <span>ENGINE</span>
+          <strong>LSTM + LGBM</strong>
+        </div>
+
+        <div class="system-row">
+          <span>REGION</span>
+          <strong>INDIA</strong>
+        </div>
+
+      </div>
+
+      <div class="sidebar-footer">
+
+        <div class="footnote">
+          TVS CREDIT <span>•</span> EPIC 8
+        </div>
+
+        <div class="footnote">
+          INTERNAL ANALYTICS TERMINAL
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+      <!-- TOP BAR -->
+
+      <header class="topbar">
+
+        <div class="topbar-left">
+
+          <div class="terminal-label">
+            EPIC / CREDIT / INTELLIGENCE
+          </div>
+
+          <div class="terminal-breadcrumb">
+            <span>PORTFOLIO</span>
+            <i>/</i>
+            <strong id="currentViewLabel">
+              OVERVIEW
+            </strong>
+          </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+          <div class="market-ticker">
+            <span class="ticker-label">RISK INDEX</span>
+            <strong id="tickerRisk">--</strong>
+            <span class="ticker-status">LIVE</span>
+          </div>
+
+          <div class="topbar-divider"></div>
+
+          <div class="terminal-clock" id="terminalClock">
+            --:--:--
+          </div>
+
+          <button
+            class="icon-btn"
+            id="refreshBtn"
+            title="Refresh dashboard"
+            aria-label="Refresh dashboard"
+            type="button"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.65 6.35A7.95 7.95 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A6.01 6.01 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35Z"/>
+            </svg>
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ================= DASHBOARD ================= -->
+
+      <section class="view active" id="view-dashboard">
+
+        <div class="view-header dashboard-header">
+
+          <div>
+            <div class="eyebrow">
+              PORTFOLIO CONTROL CENTER
+            </div>
+
+            <h1>
+              Residual Pricing
+              <span>&amp;</span>
+              Lending Intelligence
+            </h1>
+
+            <p class="subtitle">
+              Real-time residual risk, recovery and lending recommendations
+              across the EPIC 8 portfolio.
+            </p>
+          </div>
+
+          <div class="header-meta">
+
+            <div class="data-status">
+              <span class="live-dot"></span>
+              DATA ENGINE ONLINE
+            </div>
+
+            <div class="header-date">
+              MODEL SNAPSHOT
+              <strong>EPIC-RISK-V1</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <section class="portfolio-hero">
+
+          <div class="hero-grid-lines"></div>
+
+          <div class="hero-copy">
+
+            <div class="eyebrow accent">
+              PORTFOLIO HEALTH
+            </div>
+
+            <div class="hero-title">
+              Risk-adjusted
+              <br />
+              lending intelligence.
+            </div>
+
+            <p>
+              A unified view of residual value risk, predicted recovery,
+              portfolio exposure and recommended lending terms.
+            </p>
+
+            <div class="hero-actions">
+
+              <button
+                class="hero-action primary"
+                type="button"
+                onclick="document.querySelector('[data-view=&quot;explorer&quot;]').click()"
+              >
+                Explore Agreements
+                <span>→</span>
+              </button>
+
+              <button
+                class="hero-action"
+                type="button"
+                onclick="document.querySelector('[data-view=&quot;scenario&quot;]').click()"
+              >
+                Run Stress Scenario
+                <span>↗</span>
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="hero-score">
+
+            <div class="score-label">
+              PORTFOLIO
+              <span>RISK SCORE</span>
+            </div>
+
+            <div class="score-ring">
+
+              <div class="score-ring-inner">
+                <strong id="heroRiskScore">--</strong>
+                <span>/ 100</span>
+              </div>
+
+            </div>
+
+            <div class="score-footer">
+
+              <span class="score-status">
+                ● MODEL CONFIDENCE
+              </span>
+
+              <strong id="heroConfidence">
+                --
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- KPIs -->
+
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+
+        <!-- TAPE -->
+
+        <div class="market-tape">
+
+          <div class="tape-item">
+            <span>RECOVERY</span>
+            <strong id="tapeRecovery">--</strong>
+          </div>
+
+          <div class="tape-item">
+            <span>LOAN BOOK</span>
+            <strong id="tapeLoanBook">--</strong>
+          </div>
+
+          <div class="tape-item">
+            <span>EXPECTED LOSS</span>
+            <strong id="tapeExpectedLoss">--</strong>
+          </div>
+
+          <div class="tape-item">
+            <span>AVG LTV</span>
+            <strong id="tapeLtv">--</strong>
+          </div>
+
+          <div class="tape-item">
+            <span>AVG RATE</span>
+            <strong id="tapeRate">--</strong>
+          </div>
+
+          <div class="tape-signal">
+            <span class="signal-dot"></span>
+            PORTFOLIO MONITORING ACTIVE
+          </div>
+
+        </div>
+
+
+        <!-- RISK SECTION -->
+
+        <div class="section-heading">
+
+          <div class="section-heading-left">
+
+            <span class="section-number">01</span>
+
+            <div>
+              <span class="eyebrow">
+                RISK MATRIX
+              </span>
+
+              <h2>
+                Portfolio Risk Overview
+              </h2>
+            </div>
+
+          </div>
+
+          <span class="section-caption">
+            CURRENT PORTFOLIO STATE
+          </span>
+
+        </div>
+
+
+        <div class="dashboard-grid dashboard-grid-main">
+
+          <article class="card chart-card risk-card">
+
+            <div class="card-header">
+
+              <div>
+                <span class="card-kicker">
+                  DISTRIBUTION
+                </span>
+
+                <h3>Risk Band Distribution</h3>
+              </div>
+
+              <span class="card-index">R01</span>
+
+            </div>
+
+            <div class="chart-container chart-doughnut">
+              <canvas id="riskBandChart"></canvas>
+            </div>
+
+            <div class="chart-footer">
+              <span>Low → Critical exposure</span>
+              <span class="green-text">LIVE</span>
+            </div>
+
+          </article>
+
+
+          <article class="card chart-card model-card">
+
+            <div class="card-header">
+
+              <div>
+                <span class="card-kicker">
+                  MODEL PERFORMANCE
+                </span>
+
+                <h3>Prediction Engine</h3>
+              </div>
+
+              <span class="card-index">R02</span>
+
+            </div>
+
+            <div class="chart-container">
+              <canvas id="modelCompareChart"></canvas>
+            </div>
+
+            <div class="model-footer">
+
+              <div>
+                <span>VALUE MODELS</span>
+                <strong>SARIMAX / LGBM / LSTM</strong>
+              </div>
+
+              <div>
+                <span>RISK MODEL</span>
+                <strong>ENSEMBLE</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <article class="card chart-card segment-card">
+
+            <div class="card-header">
+
+              <div>
+                <span class="card-kicker">
+                  EXPOSURE
+                </span>
+
+                <h3>Highest Risk Segments</h3>
+              </div>
+
+              <span class="card-index">R03</span>
+
+            </div>
+
+            <div class="chart-container">
+              <canvas id="segmentRiskChart"></canvas>
+            </div>
+
+            <div class="mini-note">
+              Ranked by residual risk score.
+            </div>
+
+          </article>
+
+
+          <article class="card chart-card shap-card">
+
+            <div class="card-header">
+
+              <div>
+                <span class="card-kicker">
+                  EXPLAINABILITY
+                </span>
+
+                <h3>Top Risk Drivers</h3>
+              </div>
+
+              <span class="card-index">R04</span>
+
+            </div>
+
+            <div class="chart-container">
+              <canvas id="shapChart"></canvas>
+            </div>
+
+            <div class="mini-note">
+              SHAP contribution to residual risk prediction.
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <!-- FORECAST -->
+
+        <div class="section-heading">
+
+          <div class="section-heading-left">
+
+            <span class="section-number">02</span>
+
+            <div>
+              <span class="eyebrow">
+                FORWARD VIEW
+              </span>
+
+              <h2>
+                Recovery &amp; Lending Signals
+              </h2>
+            </div>
+
+          </div>
+
+          <span class="section-caption">
+            MODEL-DRIVEN FORECAST
+          </span>
+
+        </div>
+
+
+        <div class="dashboard-grid dashboard-grid-wide">
+
+          <article class="card chart-card large-card">
+
+            <div class="card-header">
+
+              <div>
+                <span class="card-kicker">
+                  FORECAST
+                </span>
+
+                <h3>Recovery Ratio Outlook</h3>
+              </div>
+
+              <span class="forecast-badge">
+                NEXT 3 MONTHS
+              </span>
+
+            </div>
+
+            <div class="chart-container large-chart">
+              <canvas id="macroForecastChart"></canvas>
+            </div>
+
+            <div class="forecast-legend">
+
+              <span>
+                <i class="legend-line historical"></i>
+                Historical
+              </span>
+
+              <span>
+                <i class="legend-line sarimax"></i>
+                SARIMAX
+              </span>
+
+              <span>
+                <i class="legend-line lightgbm"></i>
+                LightGBM
+              </span>
+
+              <span>
+                <i class="legend-line lstm"></i>
+                LSTM
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="card chart-card">
+
+            <div class="card-header">
+
+              <div>
+                <span class="card-kicker">
+                  CREDIT POLICY
+                </span>
+
+                <h3>Lending Terms</h3>
+              </div>
+
+              <span class="card-index">L01</span>
+
+            </div>
+
+            <div class="chart-container">
+              <canvas id="lendingTermsChart"></canvas>
+            </div>
+
+            <div class="mini-note">
+              Current terms compared with model recommendations.
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <!-- TRAINING -->
+
+        <div class="dashboard-grid dashboard-grid-training">
+
+          <article class="card chart-card">
+
+            <div class="card-header">
+              <div>
+                <span class="card-kicker">TRAINING</span>
+                <h3>Model Learning Curve</h3>
+              </div>
+
+              <span class="card-index">M01</span>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="trainingCurveChart"></canvas>
+            </div>
+
+          </article>
+
+
+          <article class="card chart-card">
+
+            <div class="card-header">
+              <div>
+                <span class="card-kicker">LSTM</span>
+                <h3>Sequence Loss</h3>
+              </div>
+
+              <span class="card-index">M02</span>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="lstmLossChart"></canvas>
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <!-- TOP SEGMENTS -->
+
+        <section class="card table-card">
+
+          <div class="card-header">
+
+            <div>
+              <span class="card-kicker">
+                SEGMENT INTELLIGENCE
+              </span>
+
+              <h3>Highest Exposure Segments</h3>
+            </div>
+
+            <button
+              class="text-btn"
+              type="button"
+              onclick="document.querySelector('[data-view=&quot;explorer&quot;]').click()"
+            >
+              OPEN EXPLORER →
+            </button>
+
+          </div>
+
+          <div class="table-wrap">
+
+            <table id="topSegmentsTable">
+
+              <thead>
+                <tr>
+                  <th>Segment</th>
+                  <th>Agreements</th>
+                  <th>Risk Score</th>
+                  <th>Recovery</th>
+                  <th>Critical %</th>
+                  <th>Value at Risk</th>
+                </tr>
+              </thead>
+
+              <tbody></tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+
+        <div class="terminal-footer">
+          <span>EPIC 8 / PORTFOLIO INTELLIGENCE</span>
+          <span>RESIDUAL VALUE ENGINE</span>
+          <span>© TVS CREDIT</span>
+        </div>
+
+      </section>
+
+
+      <!-- ================= EXPLORER ================= -->
+
+      <section class="view" id="view-explorer">
+
+        <div class="view-header">
+
+          <div>
+            <div class="eyebrow">
+              AGREEMENT INTELLIGENCE
+            </div>
+
+            <h1>Agreement Explorer</h1>
+
+            <p class="subtitle">
+              Search, filter and inspect agreement-level residual risk.
+            </p>
+          </div>
+
+          <div class="view-stat">
+            <span>DATASET</span>
+            <strong>LIVE</strong>
+          </div>
+
+        </div>
+
+
+        <div class="explorer-command">
+
+          <div class="command-title">
+            <span class="command-symbol">⌕</span>
+            AGREEMENT QUERY
+          </div>
+
+          <div class="explorer-controls">
+
+            <div class="control-search">
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10.5 4a6.5 6.5 0 1 0 4.03 11.6l4.44 4.44 1.42-1.42-4.44-4.44A6.5 6.5 0 0 0 10.5 4Zm0 2a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Z"/>
+              </svg>
+
+              <input
+                id="agreementSearch"
+                type="search"
+                placeholder="Search agreement ID..."
+                autocomplete="off"
+              />
+
+            </div>
+
+            <select id="riskBandFilter">
+              <option value="All">All Risk Bands</option>
+            </select>
+
+            <select id="assetModelFilter">
+              <option value="All">All Asset Models</option>
+            </select>
+
+            <select id="sortBy">
+
+              <option value="Residual_Risk_Score">
+                Risk Score
+              </option>
+
+              <option value="Predicted_Sold_Amount">
+                Predicted Sale
+              </option>
+
+              <option value="Recommended_LTV">
+                Recommended LTV
+              </option>
+
+              <option value="Recommended_Pricing">
+                Recommended Pricing
+              </option>
+
+            </select>
+
+            <button
+              id="sortDir"
+              class="sort-button"
+              type="button"
+            >
+              ↓
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="explorer-metrics">
+
+          <div class="explorer-metric">
+            <span>RECORDS</span>
+            <strong id="agreementTotal">--</strong>
+          </div>
+
+          <div class="explorer-metric">
+            <span>CURRENT SORT</span>
+            <strong id="agreementSortLabel">RISK</strong>
+          </div>
+
+          <div class="explorer-metric">
+            <span>FILTER</span>
+            <strong id="agreementFilterLabel">ALL</strong>
+          </div>
+
+          <div class="explorer-metric signal">
+            <span class="live-dot"></span>
+            <strong>API CONNECTED</strong>
+          </div>
+
+        </div>
+
+
+        <section class="card explorer-card">
+
+          <div class="table-terminal-header">
+
+            <div>
+              <span class="card-kicker">
+                LIVE AGREEMENT FEED
+              </span>
+
+              <h3>Residual Risk Book</h3>
+            </div>
+
+            <div class="table-terminal-meta">
+              CLICK ROW TO INSPECT →
+            </div>
+
+          </div>
+
+          <div class="table-wrap agreement-table-wrap">
+
+            <table id="agreementsTable">
+
+              <thead>
+                <tr>
+                  <th>Agreement</th>
+                  <th>Asset Model</th>
+                  <th>Risk</th>
+                  <th>Residual Score</th>
+                  <th>Predicted Sale</th>
+                  <th>Rec. LTV</th>
+                  <th>Rec. Pricing</th>
+                  <th>Tenure</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody></tbody>
+
+            </table>
+
+          </div>
+
+          <div class="pager">
+
+            <button
+              id="prevPage"
+              class="btn-ghost"
+              type="button"
+            >
+              ← Previous
+            </button>
+
+            <div id="pageInfo" class="page-info">
+              Page 1
+            </div>
+
+            <button
+              id="nextPage"
+              class="btn-ghost"
+              type="button"
+            >
+              Next →
+            </button>
+
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <!-- ================= SCENARIO ================= -->
+
+      <section class="view" id="view-scenario">
+
+        <div class="view-header">
+
+          <div>
+            <div class="eyebrow">
+              STRESS TESTING ENGINE
+            </div>
+
+            <h1>Scenario Lab</h1>
+
+            <p class="subtitle">
+              Compare portfolio resilience under changing recovery and
+              residual-risk conditions.
+            </p>
+          </div>
+
+          <div class="scenario-status">
+            <span class="live-dot"></span>
+            SCENARIO ENGINE READY
+          </div>
+
+        </div>
+
+
+        <section class="scenario-hero">
+
+          <div>
+
+            <span class="eyebrow accent">
+              STRESS TEST
+            </span>
+
+            <h2>
+              How does the portfolio
+              <span>break?</span>
+            </h2>
+
+            <p>
+              Evaluate residual risk, recovery performance, critical exposure
+              and portfolio value-at-risk across modeled scenarios.
+            </p>
+
+          </div>
+
+          <div class="scenario-legend">
+
+            <div>
+              <span class="scenario-number">01</span>
+              BASE
+            </div>
+
+            <div>
+              <span class="scenario-number">02</span>
+              MODERATE
+            </div>
+
+            <div>
+              <span class="scenario-number">03</span>
+              STRESS
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="card scenario-chart-card">
+
+          <div class="card-header">
+
+            <div>
+              <span class="card-kicker">
+                SCENARIO COMPARISON
+              </span>
+
+              <h3>Risk vs Recovery</h3>
+            </div>
+
+            <span class="card-index">S01</span>
+
+          </div>
+
+          <div class="scenario-chart-container">
+            <canvas id="scenarioChart"></canvas>
+          </div>
+
+        </section>
+
+
+        <section class="card table-card">
+
+          <div class="card-header">
+
+            <div>
+              <span class="card-kicker">
+                STRESS RESULTS
+              </span>
+
+              <h3>Portfolio Scenario Matrix</h3>
+            </div>
+
+            <span class="card-index">S02</span>
+
+          </div>
+
+          <div class="table-wrap">
+
+            <table id="scenarioTable">
+
+              <thead>
+                <tr>
+                  <th>Scenario</th>
+                  <th>Avg Recovery</th>
+                  <th>Residual Risk</th>
+                  <th>Critical %</th>
+                  <th>Value at Risk</th>
+                </tr>
+              </thead>
+
+              <tbody></tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+
+        <section class="scenario-insight-grid">
+
+          <div class="insight-card">
+            <span class="insight-icon">↗</span>
+
+            <div>
+              <span>PRIMARY SIGNAL</span>
+              <strong>Recovery compression</strong>
+
+              <p>
+                Lower recovery ratios can materially increase residual
+                portfolio risk.
+              </p>
+            </div>
+          </div>
+
+          <div class="insight-card">
+            <span class="insight-icon">!</span>
+
+            <div>
+              <span>WATCH</span>
+              <strong>Critical exposure</strong>
+
+              <p>
+                Monitor migration into High and Critical risk bands.
+              </p>
+            </div>
+          </div>
+
+          <div class="insight-card">
+            <span class="insight-icon">₹</span>
+
+            <div>
+              <span>VALUE SIGNAL</span>
+              <strong>Portfolio VaR</strong>
+
+              <p>
+                Use scenario value-at-risk to calibrate lending appetite.
+              </p>
+            </div>
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <!-- ================= CHAT ================= -->
+
+      <section class="view" id="view-chat">
+
+        <div class="view-header">
+
+          <div>
+            <div class="eyebrow">
+              AI DECISION SUPPORT
+            </div>
+
+            <h1>Lending Copilot</h1>
+
+            <p class="subtitle">
+              Ask questions about portfolio risk, agreements and lending
+              recommendations.
+            </p>
+          </div>
+
+          <div class="copilot-status">
+            <span class="ai-pulse"></span>
+            EPIC AI <strong>ONLINE</strong>
+          </div>
+
+        </div>
+
+
+        <section class="copilot-workspace">
+
+          <aside class="copilot-sidebar">
+
+            <div class="copilot-brand">
+
+              <div class="ai-orb">
+                <span></span>
+              </div>
+
+              <div>
+                <strong>EPIC AI</strong>
+                <span>Lending Intelligence</span>
+              </div>
+
+            </div>
+
+
+            <div class="copilot-context">
+
+              <span class="card-kicker">
+                ACTIVE CONTEXT
+              </span>
+
+              <div class="context-item">
+                <span>PORTFOLIO</span>
+                <strong>ALL AGREEMENTS</strong>
+              </div>
+
+              <div class="context-item">
+                <span>MODEL</span>
+                <strong>ENSEMBLE</strong>
+              </div>
+
+              <div class="context-item">
+                <span>OBJECTIVE</span>
+                <strong>RISK-ADJUSTED LENDING</strong>
+              </div>
+
+            </div>
+
+
+            <div class="copilot-prompts">
+
+              <span class="card-kicker">
+                QUICK ANALYSIS
+              </span>
+
+              <button class="chip" type="button">
+                Which segments have the highest risk?
+              </button>
+
+              <button class="chip" type="button">
+                Explain the lending recommendations.
+              </button>
+
+              <button class="chip" type="button">
+                What is driving expected loss?
+              </button>
+
+              <button class="chip" type="button">
+                Summarize the portfolio outlook.
+              </button>
+
+            </div>
+
+          </aside>
+
+
+          <div class="card chat-shell">
+
+            <div class="chat-header">
+
+              <div class="chat-agent">
+
+                <div class="chat-avatar">
+                  AI
+                </div>
+
+                <div>
+                  <strong>EPIC Lending Copilot</strong>
+                  <span>Risk-aware decision support</span>
+                </div>
+
+              </div>
+
+              <div class="chat-live">
+                <span></span>
+                LIVE
+              </div>
+
+            </div>
+
+
+            <div
+              class="chat-messages"
+              id="chatMessages"
+            >
+
+              <div class="msg bot">
+
+                <div class="msg-bubble welcome-message">
+
+                  <div class="welcome-eyebrow">
+                    EPIC AI / READY
+                  </div>
+
+                  <strong>
+                    Good morning.
+                  </strong>
+
+                  <p>
+                    I can help you interpret residual risk, recovery
+                    forecasts, lending terms and agreement-level
+                    recommendations.
+                  </p>
+
+                  <div class="welcome-prompt">
+                    Ask me about the portfolio or select a quick analysis
+                    below.
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="chat-suggestions">
+
+              <button class="chip" type="button">
+                Portfolio risk summary
+              </button>
+
+              <button class="chip" type="button">
+                Highest-risk segments
+              </button>
+
+              <button class="chip" type="button">
+                Explain recommended LTV
+              </button>
+
+              <button class="chip" type="button">
+                Recovery outlook
+              </button>
+
+            </div>
+
+
+            <div class="chat-input-row">
+
+              <div class="input-prefix">
+                AI
+              </div>
+
+              <input
+                id="chatInput"
+                type="text"
+                placeholder="Ask EPIC about risk, pricing, recovery or lending..."
+                autocomplete="off"
+              />
+
+              <button
+                id="chatSendBtn"
+                type="button"
+              >
+                <span>SEND</span>
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m21.7 2.3-7.2 19.1c-.27.73-1.27.8-1.64.12l-3.44-6.3-6.3-3.44c-.68-.37-.61-1.37.12-1.64l19.1-7.2c.74-.28 1.64.47 1.36 1.36ZM6.18 11.5l4.26 2.32 2.32 4.26L17.8 5.2 6.18 11.5Z"/>
+                </svg>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- ================= DETAIL DRAWER ================= -->
+
+  <div
+    class="modal-backdrop"
+    id="detailModalBackdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="detailModalTitle"
+  >
+
+    <div class="modal detail-modal">
+
+      <button
+        class="modal-close"
+        id="detailModalClose"
+        type="button"
+        aria-label="Close agreement details"
+      >
+        ×
+      </button>
+
+      <div class="detail-modal-top">
+
+        <div>
+          <span class="card-kicker">
+            AGREEMENT INTELLIGENCE
+          </span>
+
+          <h2 id="detailModalTitle">
+            Agreement Details
+          </h2>
+        </div>
+
+        <div class="detail-live">
+          LIVE
+        </div>
+
+      </div>
+
+      <div
+        id="detailModalContent"
+        class="detail-modal-content"
+      >
+
+        <div class="detail-loading">
+          <div class="loading-spinner"></div>
+
+          <span>
+            Loading agreement intelligence...
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+  ></div>
+
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/explorer.js"></script>
+  <script src="js/scenario.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
