@@ -3519,3 +3519,77 @@ tbody tr:last-child td {
     opacity: .45;
     cursor: not-allowed;
 }
+
+
+
+
+
+
+
+
+
+
+
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+.checklist-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-dim); }
+.checklist-item .checklist-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-faint); }
+.checklist-item.done { color: var(--text); }
+.checklist-item.done .checklist-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.inner-nav {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--grid-color);
+  padding-bottom: 12px;
+}
+
+.inner-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.inner-tab:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.inner-tab.active {
+  color: var(--accent);
+  background: rgba(41, 201, 163, 0.1);
+}
+
+.stacked-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

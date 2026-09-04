@@ -83,6 +83,25 @@
           <kbd>02</kbd>
         </button>
 
+
+
+<button
+          class="nav-item"
+          data-view="finance"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+          </svg>
+
+          <span>AI Finance Controller</span>
+          <kbd>05</kbd>
+        </button>
+
+
+
+
+
         <button
           class="nav-item"
           data-view="scenario"
@@ -728,6 +747,226 @@
 
       </section>
 
+
+
+
+
+<!-- ================= FINANCE CONTROLLER ================= -->
+<section class="view" id="view-finance">
+
+  <div class="view-header">
+    <div>
+      <div class="eyebrow">AUTONOMOUS FINANCE-OPS</div>
+      <h1>AI Finance Controller</h1>
+      <p class="subtitle">
+        Automated multi-source reconciliation, settlement verification, and forward cash forecasting.
+      </p>
+    </div>
+    <div class="controller-status">
+      <span class="live-dot"></span>
+      CONTROLLER <strong>STANDBY</strong>
+    </div>
+  </div>
+
+  <!-- INNER VIEW NAVIGATION (TABS) -->
+  <nav class="inner-nav" aria-label="Finance Controller Tabs">
+    <button class="inner-tab active" data-target="finance-overview">Overview & Execution</button>
+    <button class="inner-tab" data-target="finance-ledger">Exception Ledger</button>
+    <button class="inner-tab" data-target="finance-intelligence">Settlement Intelligence</button>
+    <button class="inner-tab" data-target="finance-copilot">AI Q&A Agent</button>
+  </nav>
+
+  <!-- TAB 1: OVERVIEW & EXECUTION -->
+  <div class="tab-pane active" id="finance-overview">
+    
+    <!-- CONTROLLER HERO CONTROL DECK -->
+    <section class="portfolio-hero">
+      <div class="hero-grid-lines"></div>
+      <div class="hero-copy">
+        <div class="eyebrow accent">CLOSING THE LOOP</div>
+        <div class="hero-title">Run the books &amp; <br /> cash position.</div>
+        <p>Execute a continuous agent loop across a 50+ record synthetic batch, verifying cash settlements and matching tax-lines.</p>
+        <div class="hero-actions">
+          <button class="hero-action primary" id="runBooksBtn" type="button">
+            Run 50+ Record Batch Loop <span>⚡</span>
+          </button>
+        </div>
+      </div>
+      <div class="hero-score">
+        <div class="score-label">BATCH MATCH<span>ACCURACY</span></div>
+        <div class="score-ring">
+          <div class="score-ring-inner">
+            <strong id="controllerMatchRate">--</strong><span>%</span>
+          </div>
+        </div>
+        <div class="score-footer">
+          <span class="score-status">● VERIFIED THROUGHPUT</span>
+          <strong id="controllerThroughput">0 / 50 Records</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- METRICS TAPE -->
+    <div class="market-tape">
+      <div class="tape-item"><span>BATCH SIZE</span><strong id="metricBatchSize">50 Records</strong></div>
+      <div class="tape-item"><span>AUTO-RESOLVED</span><strong id="metricResolved">--</strong></div>
+      <div class="tape-item"><span>EXCEPTIONS</span><strong id="metricExceptions" class="text-warn">--</strong></div>
+      <div class="tape-item"><span>SETTLEMENT DELTA</span><strong id="metricDelta">--</strong></div>
+      <div class="tape-item"><span>LIQUIDITY VELOCITY</span><strong id="metricVelocity" class="text-accent">High</strong></div>
+      <div class="tape-signal"><span class="signal-dot"></span>VERIFICATION CAPACITY ACTIVE</div>
+    </div>
+
+    <div class="dashboard-grid dashboard-grid-main" style="margin-top: 24px;">
+      <article class="card chart-card">
+        <div class="card-header">
+          <div><span class="card-kicker">FORECASTER</span><h3>Forward Cash Position</h3></div>
+          <span class="card-index">FC-02</span>
+        </div>
+        <div class="chart-container"><canvas id="cashForecastChart"></canvas></div>
+        <div class="mini-note">30-day rolling inflow vs settlement outflow projection.</div>
+      </article>
+
+      <article class="card chart-card">
+        <div class="card-header">
+          <div><span class="card-kicker">TAX-LINE MATCHER</span><h3>Reconciliation Breakdown</h3></div>
+          <span class="card-index">FC-03</span>
+        </div>
+        <div class="chart-container"><canvas id="taxMatcherChart"></canvas></div>
+        <div class="mini-note">Automated classification vs manual override requirements.</div>
+      </article>
+    </div>
+  </div>
+
+  <!-- TAB 2: EXCEPTION LEDGER -->
+  <div class="tab-pane" id="finance-ledger" style="display: none;">
+    <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 24px;">
+      <section class="card table-card">
+        <div class="card-header">
+          <div><span class="card-kicker">BATCH LEDGER</span><h3>Active Settlement Pipeline</h3></div>
+          <span class="card-index">FC-01</span>
+        </div>
+        <div class="table-wrap">
+          <table id="financeBatchTable">
+            <thead>
+              <tr>
+                <th>Batch ID</th><th>Source Ledger</th><th>Expected (₹)</th><th>Settled (₹)</th><th>Status</th><th>Match Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" style="text-align: center; color: var(--text-dim);">Click "Run Batch" in Overview to execute.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="stacked-cards">
+        <article class="card chart-card">
+          <div class="card-header">
+            <div><span class="card-kicker">HONEST EXCEPTIONS</span><h3>Reason Breakdown</h3></div>
+          </div>
+          <div class="chart-container" style="height: 200px;"><canvas id="exceptionBreakdownChart"></canvas></div>
+        </article>
+
+        <section class="card table-card">
+          <div class="card-header">
+            <div><span class="card-kicker">TAX EXCEPTIONS</span><h3>GST Flagged</h3></div>
+          </div>
+          <div class="table-wrap">
+            <table id="taxExceptionsTable">
+              <thead><tr><th>Loan ID</th><th>Tax Withheld</th><th>Diff %</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: SETTLEMENT INTELLIGENCE (NEW) -->
+  <div class="tab-pane" id="finance-intelligence" style="display: none;">
+    
+    <div class="dashboard-grid dashboard-grid-main">
+      <!-- FEATURE ENGINEERED: Action Matrix -->
+      <article class="card chart-card">
+        <div class="card-header">
+          <div><span class="card-kicker">DECISION ENGINE</span><h3>Chase vs. Write-Off Matrix</h3></div>
+          <span class="card-index">FC-05</span>
+        </div>
+        <div class="chart-container"><canvas id="chaseMatrixChart"></canvas></div>
+        <div class="mini-note">Plots exception delta amount against historical collection cost.</div>
+      </article>
+
+
+      <article class="card chart-card" style="margin-top: 24px;">
+  <div class="card-header">
+    <div>
+      <span class="card-kicker">BOTTLENECK ANALYSIS</span>
+      <h3>Liquidity Velocity Heatmap</h3>
+    </div>
+    <span class="card-index">FC-07</span>
+  </div>
+  <div class="chart-container" style="height: 120px;">
+    <!-- Simple CSS grid representing days of the week vs settlement volume -->
+    <div class="heatmap-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; height: 100%;">
+      <div style="background: rgba(41, 201, 163, 0.2); border-radius: 4px;"></div>
+      <div style="background: rgba(41, 201, 163, 0.8); border-radius: 4px;"></div>
+      <div style="background: rgba(255, 77, 79, 0.9); border-radius: 4px;" title="Wednesday Spike: Bank API timeouts"></div>
+      <div style="background: rgba(41, 201, 163, 0.4); border-radius: 4px;"></div>
+      <div style="background: rgba(41, 201, 163, 0.1); border-radius: 4px;"></div>
+    </div>
+  </div>
+  <div class="mini-note" style="margin-top: 8px;">Red blocks indicate high volume of T+2 SLA breaches.</div>
+</article>
+
+      <!-- FEATURE ENGINEERED: Segment Impact -->
+      <article class="card chart-card">
+        <div class="card-header">
+          <div><span class="card-kicker">RISK EXPOSURE</span><h3>Settlement Failure by Segment</h3></div>
+          <span class="card-index">FC-06</span>
+        </div>
+        <div class="chart-container"><canvas id="segmentFailureChart"></canvas></div>
+        <div class="mini-note">Which asset classes generate the most reconciliation friction.</div>
+      </article>
+    </div>
+
+    <section class="card table-card" style="margin-top: 24px;" id="recoveryReconciliationSection">
+      <div class="card-header">
+        <div><span class="card-kicker">MODEL VERIFICATION</span><h3>Recovery-Settlement Reconciler</h3></div>
+      </div>
+      <!-- Populated by JS -->
+    </section>
+
+  </div>
+
+  <!-- TAB 4: AI Q&A AGENT -->
+  <div class="tab-pane" id="finance-copilot" style="display: none;">
+    <section class="card chat-shell" style="margin-top: 0; height: calc(100vh - 200px);">
+      <div class="chat-messages" id="financeChatMessages">
+        <div class="msg bot">
+          <div class="msg-bubble">
+            Verification complete. I've analyzed the batch exceptions, tax mismatches, and segment exposure. Ask me anything.
+          </div>
+        </div>
+      </div>
+      <div class="chat-suggestions" id="financeChatSuggestions">
+        <button class="chip">Summarize the Chase vs Write-off matrix</button>
+        <button class="chip">Why did Two-Wheelers fail settlement?</button>
+        <button class="chip">List high-value tax exceptions</button>
+      </div>
+      <div class="chat-input-row">
+        <input id="financeChatInput" type="text" placeholder="Query the settlement ledger...">
+        <button id="financeChatSendBtn">Send</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="terminal-footer">
+    <span>EPIC 8 / AI FINANCE CONTROLLER</span>
+    <span>VERIFICATION ENGINE V2</span>
+    <span>© TVS CREDIT</span>
+  </div>
+
+</section>
 
       <!-- ================= EXPLORER ================= -->
 
@@ -1380,6 +1619,7 @@
   <script src="js/explorer.js"></script>
   <script src="js/scenario.js"></script>
   <script src="js/chat.js"></script>
+  <script src="js/finance.js"></script>
   <script src="js/app.js"></script>
 
 </body>
