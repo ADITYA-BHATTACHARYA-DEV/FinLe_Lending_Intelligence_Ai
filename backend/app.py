@@ -382,6 +382,11 @@ def api_health():
     })
 
 
+
+
+
+
+
 # ---------------------------------------------------------------------------
 # Serve frontend (optional convenience - you can also just open index.html directly)
 # ---------------------------------------------------------------------------
@@ -393,6 +398,102 @@ def serve_index():
 @app.route("/<path:path>")
 def serve_static(path):
     return send_from_directory(FRONTEND_DIR, path)
+
+
+
+
+
+
+
+
+# ---------------------------------------------------------------------------
+# AI Finance Controller - multi-source reconciliation, tax-line matching,
+# cash forecasting, and the recovery-settlement reconciler that ties back
+# into the main lending/residual-pricing model above.
+# ---------------------------------------------------------------------------
+FINANCE_OUT_DIR = os.path.join(OUT_DIR, "finance")
+
+
+def _load_finance_artifact(name):
+    path = os.path.join(FINANCE_OUT_DIR, name)
+    if not os.path.exists(path):
+        return None
+    with open(path) as f:
+        return json.load(f)
+
+
+@app.route("/api/finance/summary")
+def api_finance_summary():
+    """Returns whatever the last batch run produced, without re-running it.
+    Frontend calls this on view-enter so a previous run isn't lost on refresh."""
+    reconciliation = _load_finance_artifact("reconciliation_result.json")
+    if reconciliation is None:
+        return jsonify({"has_run": False})
+    return jsonify({
+        "has_run": True,
+        "reconciliation": reconciliation,
+        "tax_lines": _load_finance_artifact("tax_line_result.json"),
+        "cash_forecast": _load_finance_artifact("cash_forecast.json"),
+        "recovery_reconciliation": _load_finance_artifact("recovery_reconciliation.json"),
+    })
+
+
+@app.route("/api/finance/run", methods=["POST"])
+def api_finance_run():
+    """Regenerates the synthetic 50+ record batch and re-runs all four
+    reconciliation layers fresh (deterministic matching, no LLM in the loop)."""
+    from finance_controller import reconcile as finance_reconcile
+    finance_reconcile.run_all()
+    return api_finance_summary()
+
+
+FINANCE_SYSTEM_PROMPT = """You are the Settlement Q&A agent inside TVS Credit's AI Finance Controller.
+You answer questions about a just-completed reconciliation batch: ledger-vs-bank matching,
+GST tax-line matching on auction settlements, forward cash forecasts, and how the lending
+model's predicted recovery compares against actual settlement amounts.
+
+Rules:
+  - Only use the numbers given to you in the CONTEXT block. Never invent a match rate,
+    exception count, or amount that isn't present there.
+  - If asked about a specific loan_id or Agmt Id not present in the context, say you don't
+    have that record rather than guessing.
+  - Be concise and precise - this is a finance-ops tool, not a general chat assistant.
+  - Always distinguish between "matched" (resolved automatically) and "exception"
+    (needs human review) - never blur the two.
+"""
+
+
+@app.route("/api/finance/chat", methods=["POST"])
+def api_finance_chat():
+    body = request.get_json(force=True)
+    user_message = body.get("message", "")
+    history = body.get("history", [])
+
+    reconciliation = _load_finance_artifact("reconciliation_result.json")
+    tax_lines = _load_finance_artifact("tax_line_result.json")
+    cash_forecast = _load_finance_artifact("cash_forecast.json")
+    recovery = _load_finance_artifact("recovery_reconciliation.json")
+
+    if reconciliation is None:
+        reply = ("No reconciliation batch has been run yet. Click 'Run 50+ Record Batch Loop' "
+                  "first, then ask me about the results.")
+        return jsonify({"reply": reply})
+
+    context = json.dumps({
+        "ledger_vs_bank_reconciliation": reconciliation,
+        "tax_line_matching": tax_lines,
+        "cash_forecast": cash_forecast,
+        "recovery_vs_actual_settlement": recovery,
+    }, default=str)[:6000]  # keep the context bounded
+
+    messages = [{"role": "system", "content": FINANCE_SYSTEM_PROMPT + "\n\nCONTEXT:\n" + context}]
+    messages.extend(history[-6:])
+    messages.append({"role": "user", "content": user_message})
+
+    reply = ollama_client.chat(messages)
+    return jsonify({"reply": reply})
+
+
 
 
 if __name__ == "__main__":

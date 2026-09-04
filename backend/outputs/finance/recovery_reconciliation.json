@@ -1,0 +1,269 @@
+{
+  "layer": "D - Recovery Settlement Reconciler (model prediction vs actual liquidation)",
+  "tolerance_pct": 0.15,
+  "total_agreements": 15000,
+  "matched_count": 10209,
+  "exception_count": 4791,
+  "match_rate": 0.6806,
+  "overestimate_count": 2834,
+  "underestimate_count": 1957,
+  "worst_segments": [
+    {
+      "Asset Model": "PEP",
+      "agreements": 38.0,
+      "match_rate": 0.553,
+      "avg_abs_diff_pct": 0.203
+    },
+    {
+      "Asset Model": "MOPEDS",
+      "agreements": 2089.0,
+      "match_rate": 0.629,
+      "avg_abs_diff_pct": 0.156
+    },
+    {
+      "Asset Model": "SPORT",
+      "agreements": 1081.0,
+      "match_rate": 0.652,
+      "avg_abs_diff_pct": 0.151
+    },
+    {
+      "Asset Model": "JUPITER",
+      "agreements": 2761.0,
+      "match_rate": 0.66,
+      "avg_abs_diff_pct": 0.15
+    },
+    {
+      "Asset Model": "RADEON",
+      "agreements": 810.0,
+      "match_rate": 0.667,
+      "avg_abs_diff_pct": 0.148
+    }
+  ],
+  "top_exceptions": [
+    {
+      "Agmt Id": "ASSET_12829",
+      "Asset Model": "JUPITER",
+      "Ensemble_Predicted_Sold_Amount": 63958.2379632373,
+      "Target Sold Amount At Liquidation": 15000.0,
+      "diff_pct": 3.2638825309,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Low"
+    },
+    {
+      "Agmt Id": "ASSET_7159",
+      "Asset Model": "JUPITER",
+      "Ensemble_Predicted_Sold_Amount": 49741.472006794,
+      "Target Sold Amount At Liquidation": 13000.0,
+      "diff_pct": 2.8262670774,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_1535",
+      "Asset Model": "NTORQ",
+      "Ensemble_Predicted_Sold_Amount": 35013.3621401884,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 2.501336214,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_9281",
+      "Asset Model": "NTORQ",
+      "Ensemble_Predicted_Sold_Amount": 34376.5371921784,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 2.4376537192,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_3959",
+      "Asset Model": "RADEON",
+      "Ensemble_Predicted_Sold_Amount": 34170.7473008587,
+      "Target Sold Amount At Liquidation": 10100.0,
+      "diff_pct": 2.383242307,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_7808",
+      "Asset Model": "JUPITER",
+      "Ensemble_Predicted_Sold_Amount": 36375.0856985114,
+      "Target Sold Amount At Liquidation": 11000.0,
+      "diff_pct": 2.3068259726,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_14556",
+      "Asset Model": "APACHE",
+      "Ensemble_Predicted_Sold_Amount": 64634.6023434777,
+      "Target Sold Amount At Liquidation": 20000.0,
+      "diff_pct": 2.2317301172,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Low"
+    },
+    {
+      "Agmt Id": "ASSET_6982",
+      "Asset Model": "NTORQ",
+      "Ensemble_Predicted_Sold_Amount": 31850.6785514258,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 2.1850678551,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_11449",
+      "Asset Model": "RAIDER",
+      "Ensemble_Predicted_Sold_Amount": 47413.1174325785,
+      "Target Sold Amount At Liquidation": 15000.0,
+      "diff_pct": 2.1608744955,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_638",
+      "Asset Model": "MOPEDS",
+      "Ensemble_Predicted_Sold_Amount": 32709.2091007717,
+      "Target Sold Amount At Liquidation": 10500.0,
+      "diff_pct": 2.1151627715,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_11888",
+      "Asset Model": "MOPEDS",
+      "Ensemble_Predicted_Sold_Amount": 30909.2475947856,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 2.0909247595,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_11821",
+      "Asset Model": "JUPITER",
+      "Ensemble_Predicted_Sold_Amount": 37007.2409669219,
+      "Target Sold Amount At Liquidation": 12000.0,
+      "diff_pct": 2.0839367472,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_6460",
+      "Asset Model": "RAIDER",
+      "Ensemble_Predicted_Sold_Amount": 45726.3106100768,
+      "Target Sold Amount At Liquidation": 15000.0,
+      "diff_pct": 2.0484207073,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_5663",
+      "Asset Model": "APACHE",
+      "Ensemble_Predicted_Sold_Amount": 30439.5176959086,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 2.0439517696,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "High"
+    },
+    {
+      "Agmt Id": "ASSET_13279",
+      "Asset Model": "APACHE",
+      "Ensemble_Predicted_Sold_Amount": 30322.4105657097,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 2.0322410566,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "High"
+    },
+    {
+      "Agmt Id": "ASSET_100",
+      "Asset Model": "JUPITER",
+      "Ensemble_Predicted_Sold_Amount": 29995.9301911832,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 1.9995930191,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_13127",
+      "Asset Model": "APACHE",
+      "Ensemble_Predicted_Sold_Amount": 58796.5774685713,
+      "Target Sold Amount At Liquidation": 20000.0,
+      "diff_pct": 1.9398288734,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Low"
+    },
+    {
+      "Agmt Id": "ASSET_8821",
+      "Asset Model": "RAIDER",
+      "Ensemble_Predicted_Sold_Amount": 35496.4194989479,
+      "Target Sold Amount At Liquidation": 12100.0,
+      "diff_pct": 1.9335883883,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_7194",
+      "Asset Model": "JUPITER",
+      "Ensemble_Predicted_Sold_Amount": 28899.4616294696,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 1.8899461629,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_9127",
+      "Asset Model": "APACHE",
+      "Ensemble_Predicted_Sold_Amount": 42568.7417703841,
+      "Target Sold Amount At Liquidation": 15000.0,
+      "diff_pct": 1.837916118,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_4591",
+      "Asset Model": "RADEON",
+      "Ensemble_Predicted_Sold_Amount": 28019.8393347646,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 1.8019839335,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "High"
+    },
+    {
+      "Agmt Id": "ASSET_3994",
+      "Asset Model": "RAIDER",
+      "Ensemble_Predicted_Sold_Amount": 33545.1521033305,
+      "Target Sold Amount At Liquidation": 12000.0,
+      "diff_pct": 1.7954293419,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Critical"
+    },
+    {
+      "Agmt Id": "ASSET_11987",
+      "Asset Model": "NTORQ",
+      "Ensemble_Predicted_Sold_Amount": 41914.9246179009,
+      "Target Sold Amount At Liquidation": 15000.0,
+      "diff_pct": 1.7943283079,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    },
+    {
+      "Agmt Id": "ASSET_13040",
+      "Asset Model": "NTORQ",
+      "Ensemble_Predicted_Sold_Amount": 36490.5440510349,
+      "Target Sold Amount At Liquidation": 13200.0,
+      "diff_pct": 1.7644351554,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Low"
+    },
+    {
+      "Agmt Id": "ASSET_13660",
+      "Asset Model": "SPORT",
+      "Ensemble_Predicted_Sold_Amount": 27628.2153041603,
+      "Target Sold Amount At Liquidation": 10000.0,
+      "diff_pct": 1.7628215304,
+      "reason": "model_overestimated_recovery",
+      "Risk_Band": "Medium"
+    }
+  ]
+}

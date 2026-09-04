@@ -1,0 +1,28 @@
+{
+  "layer": "B - Tax-Line Matcher (GST on auction settlements)",
+  "gst_rate_expected": 0.18,
+  "total_settlement_records": 17,
+  "matched_count": 15,
+  "exception_count": 2,
+  "match_rate": 0.8824,
+  "exceptions": [
+    {
+      "auction_id": "AUC3026",
+      "loan_id": "LN1026",
+      "sale_amount": 46716.8,
+      "tax_withheld": 7080.03,
+      "expected_tax": 8409.02,
+      "tax_diff_pct": 0.1580433867,
+      "reason": "tax_rate_mismatch"
+    },
+    {
+      "auction_id": "AUC3052",
+      "loan_id": "LN1052",
+      "sale_amount": 157055.2,
+      "tax_withheld": 17136.32,
+      "expected_tax": 28269.94,
+      "tax_diff_pct": 0.3938324595,
+      "reason": "tax_rate_mismatch"
+    }
+  ]
+}
