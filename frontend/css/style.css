@@ -1005,6 +1005,68 @@ svg {
   transform: translateY(-1px);
 }
 
+/* =========================================================
+   RECOVERY-SETTLEMENT RECONCILER (3-column, no overflow)
+   ========================================================= */
+
+#recoveryReconciliationSection {
+  padding: 17px;
+}
+
+#recoveryReconciliationSection .kpi-grid,
+#recoveryReconciliationSection .recon-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin: 14px 0 20px;
+}
+
+#recoveryReconciliationSection .kpi-card,
+#recoveryReconciliationSection .recon-kpi-card {
+  min-width: 0;
+  min-height: 96px;
+  padding: 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--panel);
+
+  overflow: hidden;
+}
+
+#recoveryReconciliationSection .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#recoveryReconciliationSection table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+}
+
+#recoveryReconciliationSection th,
+#recoveryReconciliationSection td {
+  white-space: nowrap;
+  padding: 10px 12px;
+}
+
+@media (max-width: 900px) {
+  #recoveryReconciliationSection .kpi-grid,
+  #recoveryReconciliationSection .recon-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  #recoveryReconciliationSection .kpi-grid,
+  #recoveryReconciliationSection .recon-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .kpi-label {
   color: var(--text-muted);
 
@@ -3592,4 +3654,121 @@ tbody tr:last-child td {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   AI FINANCE CONTROLLER
+   ============================================================ */
+
+.controller-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.controller-stat {
+    padding: 14px 16px;
+    border: 1px solid var(--border, rgba(255,255,255,.08));
+    border-radius: 8px;
+    background: rgba(255,255,255,.02);
+}
+
+.controller-stat span {
+    display: block;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+}
+
+.controller-stat strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Controller status */
+
+.controller-status[data-status="running"] {
+    opacity: .8;
+}
+
+.controller-status[data-status="verified"] {
+    opacity: 1;
+}
+
+.controller-status[data-status="error"] {
+    opacity: 1;
+}
+
+/* Decision badges */
+
+.status-ok {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.status-warning {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+#liquidationControllerTable td {
+    vertical-align: middle;
+}
+
+/* Loading state */
+
+#runBooksBtn:disabled {
+    cursor: wait;
+    opacity: .7;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .controller-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .controller-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
 }

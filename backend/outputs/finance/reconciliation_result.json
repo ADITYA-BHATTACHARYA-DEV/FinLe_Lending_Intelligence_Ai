@@ -1,68 +1,86 @@
 {
   "layer": "A - Multi-source reconciliation (Ledger vs Bank)",
   "total_ledger_records": 60,
-  "total_bank_records": 56,
-  "matched_count": 43,
-  "exception_count": 20,
-  "match_rate": 0.7167,
-  "high_confidence_matches": 38,
-  "fuzzy_resolved_matches": 5,
+  "total_bank_records": 58,
+  "matched_count": 38,
+  "exception_count": 31,
+  "match_rate": 0.6333,
+  "high_confidence_matches": 34,
+  "fuzzy_resolved_matches": 4,
   "exception_reason_breakdown": {
-    "missing_bank_entry": 7,
-    "unmatched_bank_credit_or_duplicate": 3,
+    "missing_bank_entry": 11,
+    "unmatched_bank_credit_or_duplicate": 9,
+    "date_slippage_8d": 2,
+    "date_slippage_9d": 1,
+    "amount_mismatch_7.3%": 1,
+    "amount_mismatch_7.8%": 1,
+    "amount_mismatch_7.0%": 1,
+    "amount_mismatch_4.3%": 1,
+    "amount_mismatch_3.0%": 1,
     "amount_mismatch_4.8%": 1,
-    "date_slippage_16d": 1,
-    "date_slippage_12d": 1,
-    "amount_mismatch_6.4%": 1,
-    "amount_mismatch_7.9%": 1,
-    "amount_mismatch_7.5%": 1,
-    "amount_mismatch_4.6%": 1,
-    "date_slippage_11d": 1,
-    "amount_mismatch_5.6%": 1,
-    "amount_mismatch_2.6%": 1
+    "date_slippage_7d": 1,
+    "date_slippage_10d": 1
   },
   "exceptions": [
     {
-      "loan_id": "LN1002",
+      "loan_id": "LN1001",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 33989.83,
+      "expected_amount": 51314.28,
+      "matched_amount": 51314.28,
+      "bank_ref": "BNK2001",
+      "reason": "date_slippage_8d"
+    },
+    {
+      "loan_id": "LN1004",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 97771.41,
       "matched_amount": null,
       "bank_ref": null,
       "reason": "missing_bank_entry"
     },
     {
-      "loan_id": "LN1003",
+      "loan_id": "LN1007",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 92215.08,
+      "expected_amount": 112606.71,
       "matched_amount": null,
       "bank_ref": null,
       "reason": "missing_bank_entry"
     },
     {
-      "loan_id": "LN1008",
+      "loan_id": "LN1011",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 113491.62,
-      "matched_amount": 108083.07,
-      "bank_ref": "BNK2008",
-      "reason": "amount_mismatch_4.8%"
+      "expected_amount": 35222.0,
+      "matched_amount": 35222.0,
+      "bank_ref": "BNK2011",
+      "reason": "date_slippage_9d"
     },
     {
-      "loan_id": "LN1010",
+      "loan_id": "LN1012",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 34732.29,
-      "matched_amount": 34732.29,
-      "bank_ref": "BNK2010",
-      "reason": "date_slippage_16d"
+      "expected_amount": 42355.31,
+      "matched_amount": null,
+      "bank_ref": null,
+      "reason": "missing_bank_entry"
     },
     {
-      "loan_id": "LN1020",
+      "loan_id": "LN1013",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 51047.5,
+      "expected_amount": 141471.1,
+      "matched_amount": null,
+      "bank_ref": null,
+      "reason": "missing_bank_entry"
+    },
+    {
+      "loan_id": "LN1019",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 106151.14,
       "matched_amount": null,
       "bank_ref": null,
       "reason": "missing_bank_entry"
@@ -71,79 +89,79 @@
       "loan_id": "LN1021",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 144076.11,
-      "matched_amount": 144076.11,
-      "bank_ref": "BNK2021",
-      "reason": "date_slippage_12d"
-    },
-    {
-      "loan_id": "LN1022",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 167106.52,
-      "matched_amount": 156436.43,
-      "bank_ref": "BNK2022",
-      "reason": "amount_mismatch_6.4%"
-    },
-    {
-      "loan_id": "LN1024",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 173448.34,
-      "matched_amount": 159724.43,
-      "bank_ref": "BNK2024",
-      "reason": "amount_mismatch_7.9%"
-    },
-    {
-      "loan_id": "LN1025",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 61167.09,
-      "matched_amount": 56602.42,
-      "bank_ref": "BNK2025",
-      "reason": "amount_mismatch_7.5%"
-    },
-    {
-      "loan_id": "LN1028",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 177623.48,
-      "matched_amount": 169464.43,
-      "bank_ref": "BNK2028",
-      "reason": "amount_mismatch_4.6%"
-    },
-    {
-      "loan_id": "LN1031",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 120180.69,
-      "matched_amount": 120180.69,
-      "bank_ref": "BNK2031",
-      "reason": "date_slippage_11d"
-    },
-    {
-      "loan_id": "LN1032",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 118353.27,
-      "matched_amount": 111716.74,
-      "bank_ref": "BNK2032",
-      "reason": "amount_mismatch_5.6%"
-    },
-    {
-      "loan_id": "LN1034",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 105031.85,
+      "expected_amount": 53600.48,
       "matched_amount": null,
       "bank_ref": null,
       "reason": "missing_bank_entry"
     },
     {
-      "loan_id": "LN1041",
+      "loan_id": "LN1029",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 78363.54,
+      "expected_amount": 96612.79,
+      "matched_amount": 89573.17,
+      "bank_ref": "BNK2029",
+      "reason": "amount_mismatch_7.3%"
+    },
+    {
+      "loan_id": "LN1030",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 133990.76,
+      "matched_amount": 123577.31,
+      "bank_ref": "BNK2030",
+      "reason": "amount_mismatch_7.8%"
+    },
+    {
+      "loan_id": "LN1031",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 75617.2,
+      "matched_amount": 70288.21,
+      "bank_ref": "BNK2031",
+      "reason": "amount_mismatch_7.0%"
+    },
+    {
+      "loan_id": "LN1033",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 138660.35,
+      "matched_amount": 132755.95,
+      "bank_ref": "BNK2033",
+      "reason": "amount_mismatch_4.3%"
+    },
+    {
+      "loan_id": "LN1039",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 124438.52,
+      "matched_amount": null,
+      "bank_ref": null,
+      "reason": "missing_bank_entry"
+    },
+    {
+      "loan_id": "LN1042",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 30912.56,
+      "matched_amount": 29996.35,
+      "bank_ref": "BNK2042",
+      "reason": "amount_mismatch_3.0%"
+    },
+    {
+      "loan_id": "LN1043",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 170791.1,
+      "matched_amount": 162543.67,
+      "bank_ref": "BNK2043",
+      "reason": "amount_mismatch_4.8%"
+    },
+    {
+      "loan_id": "LN1044",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 124085.5,
       "matched_amount": null,
       "bank_ref": null,
       "reason": "missing_bank_entry"
@@ -152,82 +170,163 @@
       "loan_id": "LN1046",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 29270.07,
-      "matched_amount": 28520.34,
-      "bank_ref": "BNK2046",
-      "reason": "amount_mismatch_2.6%"
+      "expected_amount": 123823.17,
+      "matched_amount": 124540.89,
+      "bank_ref": "BNK2049",
+      "reason": "date_slippage_7d"
+    },
+    {
+      "loan_id": "LN1048",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 175582.67,
+      "matched_amount": 175582.67,
+      "bank_ref": "BNK2048",
+      "reason": "date_slippage_8d"
+    },
+    {
+      "loan_id": "LN1049",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 124540.89,
+      "matched_amount": null,
+      "bank_ref": null,
+      "reason": "missing_bank_entry"
+    },
+    {
+      "loan_id": "LN1052",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 177348.11,
+      "matched_amount": null,
+      "bank_ref": null,
+      "reason": "missing_bank_entry"
     },
     {
       "loan_id": "LN1053",
       "status": "EXCEPTION",
       "confidence": null,
-      "expected_amount": 160284.87,
+      "expected_amount": 136877.36,
+      "matched_amount": 136877.36,
+      "bank_ref": "BNK2053",
+      "reason": "date_slippage_10d"
+    },
+    {
+      "loan_id": "LN1057",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": 123140.16,
       "matched_amount": null,
       "bank_ref": null,
       "reason": "missing_bank_entry"
     },
     {
-      "loan_id": "LN1056",
-      "status": "EXCEPTION",
-      "confidence": null,
-      "expected_amount": 111093.49,
-      "matched_amount": null,
-      "bank_ref": null,
-      "reason": "missing_bank_entry"
-    },
-    {
-      "loan_id": "LN1013",
+      "loan_id": "LN1016",
       "status": "EXCEPTION",
       "confidence": null,
       "expected_amount": null,
-      "matched_amount": 106405.46,
-      "bank_ref": "BNK2013D",
+      "matched_amount": 140576.51,
+      "bank_ref": "BNK2016D",
       "reason": "unmatched_bank_credit_or_duplicate"
     },
     {
-      "loan_id": "LN1038",
+      "loan_id": "LN1018",
       "status": "EXCEPTION",
       "confidence": null,
       "expected_amount": null,
-      "matched_amount": 105031.85,
-      "bank_ref": "BNK2034",
+      "matched_amount": 114053.84,
+      "bank_ref": "BNK2018D",
       "reason": "unmatched_bank_credit_or_duplicate"
     },
     {
-      "loan_id": "LN1054",
+      "loan_id": "LN1041",
       "status": "EXCEPTION",
       "confidence": null,
       "expected_amount": null,
-      "matched_amount": 148871.42,
-      "bank_ref": "BNK2054D",
+      "matched_amount": 53600.48,
+      "bank_ref": "BNK2021",
+      "reason": "unmatched_bank_credit_or_duplicate"
+    },
+    {
+      "loan_id": "LN1025",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": null,
+      "matched_amount": 82652.25,
+      "bank_ref": "BNK2025D",
+      "reason": "unmatched_bank_credit_or_duplicate"
+    },
+    {
+      "loan_id": "LN1028",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": null,
+      "matched_amount": 140008.02,
+      "bank_ref": "BNK2028D",
+      "reason": "unmatched_bank_credit_or_duplicate"
+    },
+    {
+      "loan_id": "LN1031",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": null,
+      "matched_amount": 124438.52,
+      "bank_ref": "BNK2039",
+      "reason": "unmatched_bank_credit_or_duplicate"
+    },
+    {
+      "loan_id": "LN1040",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": null,
+      "matched_amount": 63759.45,
+      "bank_ref": "BNK2040D",
+      "reason": "unmatched_bank_credit_or_duplicate"
+    },
+    {
+      "loan_id": "LN1047",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": null,
+      "matched_amount": 124085.5,
+      "bank_ref": "BNK2044",
+      "reason": "unmatched_bank_credit_or_duplicate"
+    },
+    {
+      "loan_id": "0N1046",
+      "status": "EXCEPTION",
+      "confidence": null,
+      "expected_amount": null,
+      "matched_amount": 123823.17,
+      "bank_ref": "BNK2046",
       "reason": "unmatched_bank_credit_or_duplicate"
     }
   ],
   "matches_sample": [
     {
-      "loan_id": "LN1001",
+      "loan_id": "LN1002",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 75194.08,
-      "matched_amount": 75194.08,
-      "bank_ref": "BNK2001",
+      "expected_amount": 140653.46,
+      "matched_amount": 140653.46,
+      "bank_ref": "BNK2002",
       "reason": null
     },
     {
-      "loan_id": "LN1004",
+      "loan_id": "LN1003",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 90800.47,
-      "matched_amount": 90800.47,
-      "bank_ref": "BNK2004",
+      "expected_amount": 75925.83,
+      "matched_amount": 75925.83,
+      "bank_ref": "BNK2003",
       "reason": null
     },
     {
       "loan_id": "LN1005",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 122747.02,
-      "matched_amount": 122747.02,
+      "expected_amount": 29110.1,
+      "matched_amount": 29110.1,
       "bank_ref": "BNK2005",
       "reason": null
     },
@@ -235,71 +334,53 @@
       "loan_id": "LN1006",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 86485.47,
-      "matched_amount": 86485.47,
+      "expected_amount": 147326.37,
+      "matched_amount": 147326.37,
       "bank_ref": "BNK2006",
       "reason": null
     },
     {
-      "loan_id": "LN1007",
+      "loan_id": "LN1008",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 45642.1,
-      "matched_amount": 45642.1,
-      "bank_ref": "BNK2007",
+      "expected_amount": 42343.42,
+      "matched_amount": 42343.42,
+      "bank_ref": "BNK2008",
       "reason": null
     },
     {
       "loan_id": "LN1009",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 124031.59,
-      "matched_amount": 124031.59,
+      "expected_amount": 133036.2,
+      "matched_amount": 133036.2,
       "bank_ref": "BNK2009",
       "reason": null
     },
     {
-      "loan_id": "LN1011",
+      "loan_id": "LN1010",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 107416.64,
-      "matched_amount": 107416.64,
-      "bank_ref": "BNK2011",
-      "reason": null
-    },
-    {
-      "loan_id": "LN1012",
-      "status": "MATCHED",
-      "confidence": "high",
-      "expected_amount": 133344.14,
-      "matched_amount": 133344.14,
-      "bank_ref": "BNK2012",
-      "reason": null
-    },
-    {
-      "loan_id": "LN1013",
-      "status": "MATCHED",
-      "confidence": "high",
-      "expected_amount": 106405.46,
-      "matched_amount": 106405.46,
-      "bank_ref": "BNK2013",
+      "expected_amount": 143074.14,
+      "matched_amount": 143074.14,
+      "bank_ref": "BNK2010",
       "reason": null
     },
     {
       "loan_id": "LN1014",
       "status": "MATCHED",
-      "confidence": "high",
-      "expected_amount": 119388.65,
-      "matched_amount": 119388.65,
+      "confidence": "fuzzy",
+      "expected_amount": 40168.58,
+      "matched_amount": 40168.58,
       "bank_ref": "BNK2014",
-      "reason": null
+      "reason": "id_typo_resolved (bank_id=LN1414, similarity=0.83)"
     },
     {
       "loan_id": "LN1015",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 50569.13,
-      "matched_amount": 50569.13,
+      "expected_amount": 135943.14,
+      "matched_amount": 135943.14,
       "bank_ref": "BNK2015",
       "reason": null
     },
@@ -307,8 +388,8 @@
       "loan_id": "LN1016",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 90363.24,
-      "matched_amount": 90363.24,
+      "expected_amount": 140576.51,
+      "matched_amount": 140576.51,
       "bank_ref": "BNK2016",
       "reason": null
     },
@@ -316,8 +397,8 @@
       "loan_id": "LN1017",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 160699.06,
-      "matched_amount": 160699.06,
+      "expected_amount": 144819.01,
+      "matched_amount": 144819.01,
       "bank_ref": "BNK2017",
       "reason": null
     },
@@ -325,18 +406,36 @@
       "loan_id": "LN1018",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 155195.01,
-      "matched_amount": 155195.01,
+      "expected_amount": 114053.84,
+      "matched_amount": 114053.84,
       "bank_ref": "BNK2018",
       "reason": null
     },
     {
-      "loan_id": "LN1019",
+      "loan_id": "LN1020",
       "status": "MATCHED",
       "confidence": "high",
-      "expected_amount": 178929.87,
-      "matched_amount": 178929.87,
-      "bank_ref": "BNK2019",
+      "expected_amount": 101077.56,
+      "matched_amount": 101077.56,
+      "bank_ref": "BNK2020",
+      "reason": null
+    },
+    {
+      "loan_id": "LN1022",
+      "status": "MATCHED",
+      "confidence": "high",
+      "expected_amount": 114591.15,
+      "matched_amount": 114591.15,
+      "bank_ref": "BNK2022",
+      "reason": null
+    },
+    {
+      "loan_id": "LN1023",
+      "status": "MATCHED",
+      "confidence": "high",
+      "expected_amount": 170500.25,
+      "matched_amount": 170500.25,
+      "bank_ref": "BNK2023",
       "reason": null
     }
   ]

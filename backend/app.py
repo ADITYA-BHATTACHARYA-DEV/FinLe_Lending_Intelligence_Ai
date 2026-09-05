@@ -14,6 +14,8 @@ Run:
 Then open frontend/index.html in a browser (or let this server serve it directly
 at http://localhost:5000/).
 """
+
+
 import os
 import re
 import json
@@ -424,17 +426,25 @@ def _load_finance_artifact(name):
 
 @app.route("/api/finance/summary")
 def api_finance_summary():
-    """Returns whatever the last batch run produced, without re-running it.
-    Frontend calls this on view-enter so a previous run isn't lost on refresh."""
+    """
+    API endpoint that aggregates and returns all major finance-controller 
+    artifacts, including ledger reconciliations, tax matching, cash forecasts, 
+    recovery reconciliations, and the AI liquidation controller results.
+    """
     reconciliation = _load_finance_artifact("reconciliation_result.json")
+
     if reconciliation is None:
-        return jsonify({"has_run": False})
+        return jsonify({
+            "has_run": False
+        })
+
     return jsonify({
         "has_run": True,
         "reconciliation": reconciliation,
         "tax_lines": _load_finance_artifact("tax_line_result.json"),
         "cash_forecast": _load_finance_artifact("cash_forecast.json"),
         "recovery_reconciliation": _load_finance_artifact("recovery_reconciliation.json"),
+        "liquidation_controller": _load_finance_artifact("liquidation_controller.json")
     })
 
 

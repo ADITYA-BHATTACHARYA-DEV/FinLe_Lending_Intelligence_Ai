@@ -762,10 +762,13 @@
         Automated multi-source reconciliation, settlement verification, and forward cash forecasting.
       </p>
     </div>
-    <div class="controller-status">
-      <span class="live-dot"></span>
-      CONTROLLER <strong>STANDBY</strong>
-    </div>
+
+<div class="controller-status" id="financeControllerStatus">
+  <span class="live-dot"></span>
+  CONTROLLER <strong>STANDBY</strong>
+</div>
+
+
   </div>
 
   <!-- INNER VIEW NAVIGATION (TABS) -->
@@ -789,6 +792,10 @@
         <div class="hero-actions">
           <button class="hero-action primary" id="runBooksBtn" type="button">
             Run 50+ Record Batch Loop <span>⚡</span>
+            <button class="hero-action" id="uploadLedgerBtn" type="button">
+    Upload Custom Batch <span>📁</span>
+  </button>
+  <input type="file" id="ledgerFileInput" style="display: none;" accept=".csv,.json,.pdf" />
           </button>
         </div>
       </div>
@@ -882,44 +889,247 @@
     </div>
   </div>
 
-  <!-- TAB 3: SETTLEMENT INTELLIGENCE (NEW) -->
-  <div class="tab-pane" id="finance-intelligence" style="display: none;">
-    
-    <div class="dashboard-grid dashboard-grid-main">
-      <!-- FEATURE ENGINEERED: Action Matrix -->
-      <article class="card chart-card">
-        <div class="card-header">
-          <div><span class="card-kicker">DECISION ENGINE</span><h3>Chase vs. Write-Off Matrix</h3></div>
-          <span class="card-index">FC-05</span>
+ <!-- TAB 3: SETTLEMENT INTELLIGENCE -->
+<div class="tab-pane" id="finance-intelligence" style="display: none;">
+  <div class="dashboard-grid dashboard-grid-main">
+
+    <!-- DECISION ENGINE: Chase vs. Write-Off Matrix -->
+    <article class="card chart-card">
+      <div class="card-header">
+        <div>
+          <span class="card-kicker">DECISION ENGINE</span>
+          <h3>Chase vs. Write-Off Matrix</h3>
         </div>
-        <div class="chart-container"><canvas id="chaseMatrixChart"></canvas></div>
-        <div class="mini-note">Plots exception delta amount against historical collection cost.</div>
-      </article>
+        <span class="card-index">FC-05</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="chaseMatrixChart"></canvas>
+      </div>
+      <div class="mini-note">Plots exception delta amount against historical collection cost.</div>
+    </article>
 
+    <!-- BOTTLENECK ANALYSIS: Liquidity Velocity Heatmap -->
+    <article class="card chart-card">
+      <div class="card-header">
+        <div>
+          <span class="card-kicker">BOTTLENECK ANALYSIS</span>
+          <h3>Liquidity Velocity Heatmap</h3>
+        </div>
+        <span class="card-index">FC-07</span>
+      </div>
+      <div class="chart-container" style="height: 120px;">
+        <div class="heatmap-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; height: 100%;">
+          <div style="background: rgba(41, 201, 163, 0.2); border-radius: 4px;"></div>
+          <div style="background: rgba(41, 201, 163, 0.8); border-radius: 4px;"></div>
+          <div style="background: rgba(255, 77, 79, 0.9); border-radius: 4px;" title="Wednesday Spike: Bank API timeouts"></div>
+          <div style="background: rgba(41, 201, 163, 0.4); border-radius: 4px;"></div>
+          <div style="background: rgba(41, 201, 163, 0.1); border-radius: 4px;"></div>
+        </div>
+      </div>
+      <div class="mini-note" style="margin-top: 8px;">Red blocks indicate high volume of T+2 SLA breaches.</div>
+    </article>
 
-      <article class="card chart-card" style="margin-top: 24px;">
+  </div>
+
+<!-- AI LIQUIDATION CONTROL LEDGER -->
+<section class="card table-card" style="margin-top: 24px;">
   <div class="card-header">
     <div>
-      <span class="card-kicker">BOTTLENECK ANALYSIS</span>
-      <h3>Liquidity Velocity Heatmap</h3>
+      <span class="card-kicker">AI CONTROL LEDGER</span>
+      <h3>Liquidation Control Decisions</h3>
     </div>
-    <span class="card-index">FC-07</span>
+    <span class="card-index">FC-08</span>
   </div>
-  <div class="chart-container" style="height: 120px;">
-    <!-- Simple CSS grid representing days of the week vs settlement volume -->
-    <div class="heatmap-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; height: 100%;">
-      <div style="background: rgba(41, 201, 163, 0.2); border-radius: 4px;"></div>
-      <div style="background: rgba(41, 201, 163, 0.8); border-radius: 4px;"></div>
-      <div style="background: rgba(255, 77, 79, 0.9); border-radius: 4px;" title="Wednesday Spike: Bank API timeouts"></div>
-      <div style="background: rgba(41, 201, 163, 0.4); border-radius: 4px;"></div>
-      <div style="background: rgba(41, 201, 163, 0.1); border-radius: 4px;"></div>
+
+  <!-- CONTROL SUMMARY KPIS -->
+  <div class="kpi-grid" id="liquidationControlKpis">
+    <div class="kpi-card">
+      <div class="kpi-label">Assets Checked</div>
+      <div class="kpi-value" id="liquidationAssetsChecked">--</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Auto Cleared</div>
+      <div class="kpi-value" id="liquidationAutoCleared">--</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Evidence Exceptions</div>
+      <div class="kpi-value" id="liquidationEvidenceExceptions">--</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Human Review</div>
+      <div class="kpi-value" id="liquidationHumanReview">--</div>
     </div>
   </div>
-  <div class="mini-note" style="margin-top: 8px;">Red blocks indicate high volume of T+2 SLA breaches.</div>
-</article>
+
+  <!-- CONTROL FILTERS -->
+  <div class="finance-control-filters" style="display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap;">
+    <select id="liquidationStatusFilter">
+      <option value="ALL">All Decisions</option>
+      <option value="AUTO_CLEAR">Auto Clear</option>
+      <option value="CONTROL_REVIEW">Control Review</option>
+      <option value="HUMAN_REVIEW">Human Review</option>
+    </select>
+
+    <select id="liquidationEvidenceFilter">
+      <option value="ALL">All Evidence</option>
+      <option value="FOUND">Evidence Found</option>
+      <option value="MISSING">Evidence Missing</option>
+    </select>
+
+    <input
+      id="liquidationSearch"
+      type="text"
+      placeholder="Search Asset ID..."
+    />
+  </div>
+
+  <!-- LEDGER TABLE -->
+  <div class="table-wrap">
+    <table id="liquidationControlTable">
+      <thead>
+        <tr>
+          <th>Asset ID</th>
+          <th>Outstanding</th>
+          <th>Target Sale</th>
+          <th>Coverage</th>
+          <th>Recovery Gap</th>
+          <th>Control Score</th>
+          <th>Evidence</th>
+          <th>Decision</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="9" style="text-align: center; color: var(--text-dim);">
+            Run the Liquidation Control Loop to populate this ledger.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+<div id="evidenceDropzone" tabindex="0" style="border: 2px dashed #8b93a1; padding: 20px; text-align: center; cursor: pointer; border-radius: 8px; margin-bottom: 10px;">
+  Click or Drag & Drop to Upload Evidence Documents
+</div>
+<input type="file" id="evidenceFileInput" multiple style="display: none;" />
+<div id="evidenceDocList">
+  <div class="mini-note">No documents uploaded yet.</div>
+</div>
+
+<div style="padding: 16px; border: 1px solid #eee; border-radius: 8px;">
+  <div id="controllerDecisionSummary" style="margin-bottom: 12px; font-weight: bold;">
+    <!-- JavaScript injects the control score summary here -->
+  </div>
+    <div id="ragEvidencePanel">
+  <div class="mini-note">
+    Select a liquidation record from the control ledger to inspect the valuation and policy evidence used by the controller.
+  </div>
+</div>
+
+
+<table id="liquidationControlTable" style="width: 100%; text-align: left;">
+  <thead>
+    <tr>
+      <th>Asset ID</th>
+      <th>Out</th>
+      <th>Target</th>
+      <th>Coverage</th>
+      <th>Gap</th>
+      <th>Score</th>
+      <th>Evidence</th>
+      <th>Status</th>
+      <th>Conf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- JavaScript auto-generates rows here -->
+  </tbody>
+</table>
+
+
+  </div>
+</section>
+
+<!-- RAG EVIDENCE PANEL -->
+<section class="card" style="margin-top: 24px;">
+  <div class="card-header">
+    <div>
+      <span class="card-kicker">RAG EVIDENCE</span>
+      <h3>Evidence Verification</h3>
+    </div>
+    <span class="card-index">FC-09</span>
+  </div>
+
+  <div id="ragEvidencePanel">
+    <div class="mini-note">
+      Select a liquidation record from the control ledger to inspect
+      the valuation and policy evidence used by the controller.
+    </div>
+  </div>
+</section>
+
+<!-- AGENT EXECUTION TRACE -->
+<section class="card" style="margin-top: 24px;">
+  <div class="card-header">
+    <div>
+      <span class="card-kicker">AGENT EXECUTION TRACE</span>
+      <h3>Controller Decision Path</h3>
+    </div>
+    <span class="card-index">FC-10</span>
+  </div>
+
+  <div id="controllerDecisionTrace" style="display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 0;">
+    <span class="badge Medium">DETERMINISTIC</span>
+    <span>→</span>
+    <span class="badge Medium">RAG</span>
+    <span>→</span>
+    <span class="badge Medium">VERIFICATION</span>
+    <span>→</span>
+    <span class="badge Medium">DECISION</span>
+  </div>
+
+  <div id="controllerDecisionSummary" class="mini-note">
+    No controller decision selected.
+  </div>
+</section>
+
+<!-- HUMAN REVIEW QUEUE -->
+<section class="card table-card" style="margin-top: 24px;">
+  <div class="card-header">
+    <div>
+      <span class="card-kicker">CONTROL EXCEPTIONS</span>
+      <h3>Human Review Queue</h3>
+    </div>
+    <span class="card-index">FC-11</span>
+  </div>
+
+  <div class="table-wrap">
+    <table id="humanReviewTable">
+      <thead>
+        <tr>
+          <th>Asset ID</th>
+          <th>Control Score</th>
+          <th>Recovery Gap</th>
+          <th>Reason</th>
+          <th>Evidence</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="6" style="text-align: center; color: var(--text-dim);">
+            No human-review cases.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
       <!-- FEATURE ENGINEERED: Segment Impact -->
-      <article class="card chart-card">
+      <article class="card chart-card" style="margin-top: 24px;">
         <div class="card-header">
           <div><span class="card-kicker">RISK EXPOSURE</span><h3>Settlement Failure by Segment</h3></div>
           <span class="card-index">FC-06</span>
@@ -927,13 +1137,13 @@
         <div class="chart-container"><canvas id="segmentFailureChart"></canvas></div>
         <div class="mini-note">Which asset classes generate the most reconciliation friction.</div>
       </article>
-    </div>
 
-    <section class="card table-card" style="margin-top: 24px;" id="recoveryReconciliationSection">
+    <section class="card table-card recon-card" style="margin-top: 24px;" id="recoveryReconciliationSection">
       <div class="card-header">
         <div><span class="card-kicker">MODEL VERIFICATION</span><h3>Recovery-Settlement Reconciler</h3></div>
       </div>
-      <!-- Populated by JS -->
+      <!-- Populated by JS: finance.js injects .recon-kpi-grid (3-col stat cards)
+           followed by .table-wrap tables into this section -->
     </section>
 
   </div>
@@ -967,6 +1177,10 @@
   </div>
 
 </section>
+
+
+
+
 
       <!-- ================= EXPLORER ================= -->
 
@@ -1619,6 +1833,7 @@
   <script src="js/explorer.js"></script>
   <script src="js/scenario.js"></script>
   <script src="js/chat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/finance.js"></script>
   <script src="js/app.js"></script>
 

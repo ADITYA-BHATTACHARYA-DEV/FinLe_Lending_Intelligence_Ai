@@ -1,38 +1,38 @@
 {
   "layer": "C - Forward Cash Forecaster",
-  "historical_match_rate_used_as_collection_probability": 0.7167,
+  "historical_match_rate_used_as_collection_probability": 0.6333,
   "monthly_forecast": [
     {
       "month": "2026-01",
-      "expected_amount": 1075425.0,
-      "risk_adjusted_forecast": 770757.0
+      "expected_amount": 808816.0,
+      "risk_adjusted_forecast": 512223.0
     },
     {
       "month": "2026-02",
-      "expected_amount": 1730015.0,
-      "risk_adjusted_forecast": 1239902.0
+      "expected_amount": 1639738.0,
+      "risk_adjusted_forecast": 1038446.0
     },
     {
       "month": "2026-03",
-      "expected_amount": 916199.0,
-      "risk_adjusted_forecast": 656640.0
+      "expected_amount": 1656913.0,
+      "risk_adjusted_forecast": 1049323.0
     },
     {
       "month": "2026-04",
-      "expected_amount": 938513.0,
-      "risk_adjusted_forecast": 672632.0
+      "expected_amount": 1697373.0,
+      "risk_adjusted_forecast": 1074946.0
     },
     {
       "month": "2026-05",
-      "expected_amount": 1712403.0,
-      "risk_adjusted_forecast": 1227279.0
+      "expected_amount": 800085.0,
+      "risk_adjusted_forecast": 506694.0
     },
     {
       "month": "2026-06",
-      "expected_amount": 122747.0,
-      "risk_adjusted_forecast": 87973.0
+      "expected_amount": 126135.0,
+      "risk_adjusted_forecast": 79881.0
     }
   ],
-  "total_expected_next_period": 6495302.0,
-  "total_risk_adjusted": 4655183.0
+  "total_expected_next_period": 6729060.0,
+  "total_risk_adjusted": 4261513.0
 }
