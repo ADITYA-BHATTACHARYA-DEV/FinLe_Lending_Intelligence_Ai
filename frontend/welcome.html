@@ -5,13 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Welcome - TVS Credit EPIC 8</title>
 <style>
+  /* =========================================================
+     DIGITAL TWIN THEME VARIABLES
+  ========================================================= */
   :root {
-    --bg-dark: #0f172a;
-    --bg-card: #1e293b;
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
-    --accent: #3b82f6;
-    --accent-hover: #2563eb;
+    --dt-bg: #07100e;
+    --dt-panel: rgba(13, 25, 22, 0.88);
+    --dt-panel-2: rgba(18, 34, 30, 0.72);
+    --dt-border: rgba(255, 255, 255, 0.08);
+    --dt-border-bright: rgba(41, 201, 163, 0.30);
+    --dt-accent: #29c9a3;
+    --dt-accent-hover: #2fe0b7;
+    --dt-accent-soft: rgba(41, 201, 163, 0.12);
+    --dt-text: #eef5f3;
+    --dt-muted: #82958f;
+    --dt-radius: 16px;
   }
 
   * {
@@ -26,94 +34,245 @@
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-main);
+    background-color: var(--dt-bg);
+    color: var(--dt-text);
     overflow-x: hidden;
   }
 
-  /* --- BRANDING --- */
-  .brand-mark {
-    font-size: 4rem;
+  /* =========================================================
+     TYPOGRAPHY & BADGES
+  ========================================================= */
+  .kicker {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: var(--dt-accent);
+    font-size: 10px;
     font-weight: 800;
-    letter-spacing: -2px;
-    margin-bottom: 1rem;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
   }
-  .brand-mark span { color: #64748b; }
-  .brand-8 { color: var(--accent) !important; }
-  
-  /* --- HERO SECTION --- */
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 14px;
+    margin-bottom: 24px;
+    border: 1px solid var(--dt-border-bright);
+    border-radius: 999px;
+    background: var(--dt-accent-soft);
+    color: var(--dt-accent);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+  }
+
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--dt-accent);
+    box-shadow: 0 0 12px var(--dt-accent);
+    animation: dtPulse 1.7s infinite;
+  }
+
+  @keyframes dtPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .45; transform: scale(.75); }
+  }
+
+  /* =========================================================
+     BUTTONS (DT STYLIZED)
+  ========================================================= */
+  .btn-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 160px;
+    padding: 16px 28px;
+    border-radius: 8px;
+    border: 1px solid var(--dt-border);
+    background: rgba(255,255,255,.035);
+    color: var(--dt-text);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,.2);
+    background: rgba(255,255,255,.05);
+  }
+
+  .btn.primary {
+    border-color: var(--dt-accent);
+    background: var(--dt-accent);
+    color: #06120f;
+    box-shadow: 0 8px 25px rgba(41,201,163,.18);
+  }
+
+  .btn.primary:hover {
+    box-shadow: 0 10px 30px rgba(41,201,163,.30);
+    background: var(--dt-accent-hover);
+  }
+
+  /* =========================================================
+     HERO SECTION
+  ========================================================= */
   .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070') center/cover;
-    padding: 2rem;
     position: relative;
+    padding: 2rem;
+    background: 
+      radial-gradient(circle at 50% 0%, rgba(41, 201, 163, 0.08) 0%, transparent 50%),
+      linear-gradient(rgba(7, 16, 14, 0.8), rgba(7, 16, 14, 0.95)), 
+      url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070') center/cover fixed;
   }
 
-  .hero p {
-    font-size: 1.5rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin-bottom: 2.5rem;
-    line-height: 1.5;
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, var(--dt-bg), transparent);
   }
 
-  .btn {
-    display: inline-block;
-    padding: 16px 32px;
-    background-color: var(--accent);
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.25rem;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  .brand-mark {
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+    animation: fadeInDown 1s ease-out;
   }
+  
+  .brand-mark span { color: var(--dt-muted); }
+  .brand-8 { color: var(--dt-accent) !important; text-shadow: 0 0 25px rgba(41,201,163,0.4); }
 
-  .btn:hover {
-    background-color: var(--accent-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+  .hero .subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--dt-muted);
+    max-width: 650px;
+    margin: 1.5rem auto 0;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1s ease-out 0.2s both;
   }
 
   .scroll-indicator {
     position: absolute;
     bottom: 40px;
     animation: bounce 2s infinite;
-    opacity: 0.7;
+    opacity: 0.5;
+    z-index: 2;
   }
+  
   .scroll-indicator svg {
-    width: 30px;
-    height: 30px;
-    fill: var(--text-main);
+    width: 24px;
+    height: 24px;
+    fill: var(--dt-accent);
   }
 
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-15px); }
-    60% { transform: translateY(-7px); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
   }
 
-  /* --- INFO SECTIONS --- */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* =========================================================
+     MARQUEE
+  ========================================================= */
+  .marquee-container {
+    width: 100%;
+    background: rgba(255,255,255,0.01);
+    border-top: 1px solid var(--dt-border);
+    border-bottom: 1px solid var(--dt-border);
+    overflow: hidden;
+    padding: 1.25rem 0;
+    display: flex;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+  }
+
+  .marquee-content {
+    display: flex;
+    animation: marquee 30s linear infinite;
+  }
+
+  .marquee-item {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--dt-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .marquee-item span {
+    color: var(--dt-accent);
+    font-size: 14px;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* =========================================================
+     INFO SECTIONS & GLASS PANELS
+  ========================================================= */
   .section {
-    min-height: 80vh;
-    padding: 6rem 2rem;
+    padding: 7rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
 
   .container {
-    max-width: 1100px;
+    max-width: 1200px;
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 4rem;
+    gap: 5rem;
   }
 
   .container.reverse {
@@ -125,40 +284,212 @@
   }
 
   .content h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
     margin-bottom: 1.5rem;
+    letter-spacing: -1px;
   }
 
   .content p {
     font-size: 1.1rem;
-    color: var(--text-muted);
+    color: var(--dt-muted);
     line-height: 1.7;
     margin-bottom: 1.5rem;
   }
 
+  /* Stylized Image Panel matching DT cards with hover zoom animation */
   .image-wrapper {
-    flex: 1;
-    border-radius: 12px;
+    flex: 1.2;
+    position: relative;
+    padding: 12px;
+    background: linear-gradient(145deg, rgba(20, 38, 33, .92), rgba(7, 16, 14, .94));
+    border: 1px solid var(--dt-border);
+    border-radius: var(--dt-radius);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255,255,255,.025);
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s, box-shadow 0.6s;
+  }
+
+  .image-wrapper::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 32px;
+    bottom: 32px;
+    width: 3px;
+    border-radius: 0 4px 4px 0;
+    background: var(--dt-accent);
+    opacity: .75;
+    z-index: 2;
+  }
+
+  .image-wrapper:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: var(--dt-border-bright);
+    box-shadow: 0 25px 60px rgba(41, 201, 163, 0.15), inset 0 1px 0 rgba(255,255,255,.05);
   }
 
   .image-wrapper img {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.5s ease;
+    border-radius: 8px;
+    opacity: 0.85;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
   }
 
   .image-wrapper:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+    opacity: 1;
   }
 
-  /* --- SCROLL ANIMATIONS --- */
+  /* Feature Grid Layout for multi-image sections */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    flex: 1.2;
+  }
+
+  .feature-sub-card {
+    background: linear-gradient(145deg, rgba(20, 38, 33, .92), rgba(7, 16, 14, .94));
+    border: 1px solid var(--dt-border);
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+
+  .feature-sub-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--dt-border-bright);
+  }
+
+  .feature-sub-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+  }
+
+  .feature-sub-card:hover img {
+    opacity: 1;
+  }
+
+  .feature-sub-card h4 {
+    font-size: 14px;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+
+  .feature-sub-card p {
+    font-size: 11.5px !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* =========================================================
+     UPLOAD SECTION (DATA INGESTION)
+  ========================================================= */
+  .upload-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3rem;
+    background: linear-gradient(145deg, rgba(20, 38, 33, .4), rgba(7, 16, 14, .6));
+    border: 1px solid var(--dt-border);
+    border-radius: var(--dt-radius);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .2);
+  }
+
+  .upload-zone {
+    margin-top: 2.5rem;
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.01);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .upload-zone:hover {
+    border-color: rgba(41, 201, 163, 0.4);
+    background: rgba(41, 201, 163, 0.02);
+  }
+
+  .upload-zone.dragover {
+    border-color: var(--dt-accent);
+    background: var(--dt-accent-soft);
+    transform: scale(1.02);
+  }
+
+  .upload-icon {
+    width: 48px;
+    height: 48px;
+    fill: var(--dt-muted);
+    margin-bottom: 1.5rem;
+    transition: fill 0.3s, transform 0.3s;
+  }
+
+  .upload-zone:hover .upload-icon {
+    fill: var(--dt-accent);
+    transform: translateY(-5px);
+  }
+
+  .upload-zone h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .upload-zone p {
+    color: var(--dt-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .file-list {
+    margin-top: 2rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .file-item {
+    background: rgba(0,0,0,0.3);
+    padding: 16px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--dt-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .file-item strong {
+    font-size: 14px;
+    color: var(--dt-text);
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* =========================================================
+     ANIMATIONS SCROLL REVEAL
+  ========================================================= */
   .reveal {
     opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease-out;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal.active {
@@ -166,14 +497,32 @@
     transform: translateY(0);
   }
 
-  /* --- RESPONSIVE --- */
-  @media (max-width: 768px) {
+  /* =========================================================
+     RESPONSIVE
+  ========================================================= */
+  @media (max-width: 992px) {
     .container, .container.reverse {
       flex-direction: column;
       text-align: center;
-      gap: 2rem;
+      gap: 3rem;
     }
-    .brand-mark { font-size: 3rem; }
+    
+    .image-wrapper::before, .feature-sub-card::before {
+      display: none;
+    }
+    
+    .feature-grid {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+    
+    .btn-group {
+      flex-direction: column;
+    }
+    
+    .btn {
+      width: 100%;
+    }
   }
 </style>
 </head>
@@ -181,10 +530,26 @@
 
   <!-- Hero Section -->
   <header class="hero">
-    <div class="brand-mark reveal active">e<span>.</span>p<span>.</span>i<span>.</span>c<span class="brand-8">8</span></div>
-    <p class="reveal active" style="transition-delay: 0.2s;">Residual Pricing &amp; Lending Engine</p>
-    <div class="reveal active" style="transition-delay: 0.4s;">
-      <a href="index.html" class="btn">Access Dashboard</a>
+    <div class="status-badge reveal active">
+      <span class="live-dot"></span>
+      SYSTEM ONLINE • ENGINE v8.4
+    </div>
+    
+    <div class="brand-mark reveal active">
+      e<span>.</span>p<span>.</span>i<span>.</span>c<span class="brand-8">8</span>
+    </div>
+    
+    <p class="subtitle reveal active">
+      The Next-Generation Residual Pricing &amp; Lending Engine. Transform complex multi-asset dataset variants into predictive portfolio intelligence instantly.
+    </p>
+    
+    <div class="btn-group reveal active">
+      <a href="index.html" class="btn primary">
+        Initialize Environment <span>⚡</span>
+      </a>
+      <a href="#ingestion" class="btn">
+        Data Ingestion
+      </a>
     </div>
     
     <div class="scroll-indicator">
@@ -192,38 +557,99 @@
     </div>
   </header>
 
-  <!-- Feature Section 1 -->
-  <section class="section bg-card">
+  <!-- Marquee Banner -->
+  <div class="marquee-container">
+    <div class="marquee-content">
+      <div class="marquee-item">
+        Real-time Analytics <span>◆</span> Deep Learning Models <span>◆</span> Automated Underwriting <span>◆</span> Risk Scoring <span>◆</span> Portfolio Management <span>◆</span> Digital Twin Simulation <span>◆</span>
+      </div>
+      <div class="marquee-item">
+        Real-time Analytics <span>◆</span> Deep Learning Models <span>◆</span> Automated Underwriting <span>◆</span> Risk Scoring <span>◆</span> Portfolio Management <span>◆</span> Digital Twin Simulation <span>◆</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature Section 1: Portfolio Intelligence -->
+  <section class="section">
     <div class="container reveal">
       <div class="content">
-        <h2>Portfolio Intelligence</h2>
-        <p>Gain a live view of every trained model's output across your full financed-asset portfolio. Track risk band distributions, model performance, and deep learning training curves in real-time[cite: 1].</p>
-        <p>Drill down into highest-risk segments and monitor average recovery ratios and health indices instantly[cite: 1].</p>
+        <span class="kicker">MACRO VIEW & ANALYTICS</span>
+        <h2>Comprehensive Portfolio Intelligence</h2>
+        <p>Gain an instantaneous command center view of every trained model's output across your entire financed-asset portfolio. Continuously track dynamic risk band distributions, model error rates, and deep learning training convergence curves.</p>
+        <p>Deep-dive directly into high-exposure sub-segments, tracking shifts in average recovery ratios, residual valuation variances, and overall portfolio health metrics before risks compound.</p>
       </div>
       <div class="image-wrapper">
-        <img src="https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80&w=1000" alt="Dashboard Analytics">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200" alt="Dashboard Analytics Engine">
       </div>
     </div>
   </section>
 
-  <!-- Feature Section 2 -->
+  <!-- Feature Section 2: AI Copilot & Automated Underwriting -->
   <section class="section">
     <div class="container reverse reveal">
       <div class="content">
-        <h2>AI Lending Copilot</h2>
-        <p>Interact directly with the system using the integrated AI copilot. Ask complex questions about specific agreements, risk segments, or scenario stress-test results using natural language[cite: 1].</p>
-        <a href="index.html" class="btn">Launch Copilot</a>
+        <span class="kicker">GENERATIVE COPILOT</span>
+        <h2>Context-Aware AI Lending Assistant</h2>
+        <p>Interrogate complex financing portfolios using an embedded large-language copilot. Ask targeted structural inquiries regarding specific loan agreements, anomalous risk tiers, or deep macroeconomic stress-test iterations.</p>
+        <p>The copilot bridges historical underwriting records with real-time portfolio telemetry, instantly outputting executive-ready audit summaries and custom structural recommendations.</p>
+        <div style="margin-top: 2rem;">
+          <a href="index.html" class="btn primary">Launch Copilot Interface</a>
+        </div>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-sub-card">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600" alt="Neural Networks">
+          <h4>Neural Risk Mapping</h4>
+          <p>Automated feature weighting across multi-variable risk matrices.</p>
+        </div>
+        <div class="feature-sub-card">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600" alt="Synthetic Data">
+          <h4>Synthetic Projections</h4>
+          <p>Simulating forward-looking default distributions under pressure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Section 3: Digital Twin Simulations -->
+  <section class="section">
+    <div class="container reveal">
+      <div class="content">
+        <span class="kicker">SANDBOX ENVIRONMENT</span>
+        <h2>Frictionless Digital Twin Simulations</h2>
+        <p>Stress-test your lending policies prior to live release. Construct isolated digital clones of your production environment to simulate severe market disruptions, residual value crashes, and recovery degradation.</p>
+        <p>Quantify value-at-risk (VaR) alterations dynamically through sliders and parameter tweaks, ensuring your core assets remain resilient under extreme financial climate shifts.</p>
       </div>
       <div class="image-wrapper">
-        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000" alt="AI Technology">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200" alt="Digital Twin System Simulation">
+      </div>
+    </div>
+  </section>
+
+  <!-- Upload Section: Data Ingestion Terminal -->
+  <section class="section" id="ingestion">
+    <div class="upload-section reveal">
+      <span class="kicker">SECURE DATA INGESTION PIPELINE</span>
+      <h2>Train & Refine Custom Models</h2>
+      <p style="color: var(--dt-muted); margin-top: 1rem;">Seamlessly upload historical portfolio tables, demographic assessment PDFs, or pricing matrix spreadsheets to continuously retrain and calibrate the EPIC 8 prediction engine.</p>
+      
+      <div class="upload-zone" id="drop-zone">
+        <svg class="upload-icon" viewBox="0 0 24 24">
+          <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.36 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+        </svg>
+        <h3>Drag & Drop Dataset Packages</h3>
+        <p>Supports .CSV, .PDF, .XLSX file architecture (Max file capacity: 50MB)</p>
+        <input type="file" id="file-upload" accept=".pdf,.csv,.xlsx" multiple>
+        <label for="file-upload" class="btn primary" style="min-width: auto; padding: 12px 24px;">Browse Source Files</label>
+        
+        <div class="file-list" id="file-list"></div>
       </div>
     </div>
   </section>
 
   <script>
-    // Intersection Observer for scroll animations
+    // --- Scroll Intersection Animations ---
     const revealElements = document.querySelectorAll('.reveal:not(.active)');
-
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -233,11 +659,73 @@
       });
     }, {
       root: null,
-      threshold: 0.15, 
-      rootMargin: "0px 0px -50px 0px"
+      threshold: 0.12, 
+      rootMargin: "0px 0px -40px 0px"
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
+
+    // --- File Upload Logic with Dynamic UI Injection ---
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-upload');
+    const fileList = document.getElementById('file-list');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, preventDefaults, false);
+      document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
+    });
+
+    dropZone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'LABEL' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON') {
+        fileInput.click();
+      }
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      handleFiles(files);
+    });
+
+    fileInput.addEventListener('change', function() {
+      handleFiles(this.files);
+    });
+
+    function handleFiles(files) {
+      [...files].forEach(file => {
+        const item = document.createElement('div');
+        item.className = 'file-item';
+        
+        const size = (file.size / 1024 / 1024).toFixed(2) > 1 
+          ? `${(file.size / 1024 / 1024).toFixed(2)} MB` 
+          : `${(file.size / 1024).toFixed(2)} KB`;
+
+        item.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--dt-accent)"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <div>
+              <strong>${file.name}</strong>
+              <div style="color: var(--dt-muted); font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-top: 2px;">SIZE: ${size}</div>
+            </div>
+          </div>
+          <span style="color: var(--dt-accent); font-weight: 800; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; background: var(--dt-accent-soft); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--dt-border-bright);">Ready for Pipeline</span>
+        `;
+        fileList.appendChild(item);
+      });
+    }
   </script>
 </body>
 </html>

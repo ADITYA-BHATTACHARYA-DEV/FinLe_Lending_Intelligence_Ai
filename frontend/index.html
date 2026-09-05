@@ -24,6 +24,7 @@
   />
 
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/digital-twin.css">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
@@ -1762,6 +1763,311 @@
   </div>
 
 
+<div id="view-digital-twin">
+  <!-- Header & Status -->
+  <div class="view-header">
+    <div>
+      <div class="card-kicker" style="margin-bottom: 8px;">PORTFOLIO SIMULATION ENGINE</div>
+      <h1 style="margin-top: 0;">Digital Twin</h1>
+      <p class="subtitle">
+        Simulate changes to lending, recovery and residual-value assumptions
+        without changing the live portfolio.
+      </p>
+    </div>
+    <div id="digitalTwinStatus">
+      <span class="live-dot"></span>
+      DIGITAL TWIN READY
+    </div>
+  </div>
+
+  <!-- Card 01: Simulation Controls -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <span class="card-kicker">
+          SIMULATION CONTROLS
+        </span>
+        <h3>Change Portfolio Assumptions</h3>
+      </div>
+      <span class="card-index">DT01</span>
+    </div>
+
+    <div class="twin-controls">
+      <!-- ASSET MODEL -->
+      <div class="twin-control">
+        <label for="twinAssetModel">
+          Asset Model
+        </label>
+        <select id="twinAssetModel">
+          <option value="ALL">ALL ASSET MODELS</option>
+          <option value="NTORQ">NTORQ</option>
+          <option value="RAIDER">RAIDER</option>
+          <option value="SPORT">SPORT</option>
+          <option value="RONIN">RONIN</option>
+          <option value="APACHE">APACHE</option>
+        </select>
+      </div>
+
+      <!-- LTV -->
+      <div class="twin-control">
+        <div class="twin-label-row">
+          <label for="twinLtv">LTV</label>
+          <strong id="twinLtvValue">86.5%</strong>
+        </div>
+        <input
+          id="twinLtv"
+          type="range"
+          min="40"
+          max="100"
+          step="0.5"
+          value="86.5"
+        />
+      </div>
+
+      <!-- RECOVERY -->
+      <div class="twin-control">
+        <div class="twin-label-row">
+          <label for="twinRecovery">Recovery Adjustment</label>
+          <strong id="twinRecoveryValue">0%</strong>
+        </div>
+        <input
+          id="twinRecovery"
+          type="range"
+          min="-30"
+          max="30"
+          step="1"
+          value="0"
+        />
+      </div>
+
+      <!-- RESIDUAL VALUE -->
+      <div class="twin-control">
+        <div class="twin-label-row">
+          <label for="twinResidual">Residual Value Adjustment</label>
+          <strong id="twinResidualValue">0%</strong>
+        </div>
+        <input
+          id="twinResidual"
+          type="range"
+          min="-30"
+          max="30"
+          step="1"
+          value="0"
+        />
+      </div>
+
+      <!-- PRICING -->
+      <div class="twin-control">
+        <div class="twin-label-row">
+          <label for="twinPricing">Pricing Adjustment</label>
+          <strong id="twinPricingValue">0%</strong>
+        </div>
+        <input
+          id="twinPricing"
+          type="range"
+          min="-5"
+          max="5"
+          step="0.25"
+          value="0"
+        />
+      </div>
+
+      <!-- TENURE -->
+      <div class="twin-control">
+        <div class="twin-label-row">
+          <label for="twinTenure">Tenure Adjustment</label>
+          <strong id="twinTenureValue">0 months</strong>
+        </div>
+        <input
+          id="twinTenure"
+          type="range"
+          min="-24"
+          max="24"
+          step="1"
+          value="0"
+        />
+      </div>
+    </div>
+
+    <!-- PRESETS -->
+    <div class="twin-presets">
+      <span class="card-kicker">
+        QUICK SCENARIOS
+      </span>
+      <div class="twin-preset-buttons">
+        <button type="button" class="twin-preset active" data-twin-preset="baseline">
+          BASELINE
+        </button>
+        <button type="button" class="twin-preset" data-twin-preset="conservative">
+          CONSERVATIVE LENDING
+        </button>
+        <button type="button" class="twin-preset" data-twin-preset="recovery">
+          RECOVERY STRESS
+        </button>
+        <button type="button" class="twin-preset" data-twin-preset="residual">
+          RESIDUAL VALUE SHOCK
+        </button>
+        <button type="button" class="twin-preset" data-twin-preset="combined">
+          COMBINED STRESS
+        </button>
+      </div>
+    </div>
+
+    <div class="twin-actions">
+      <button type="button" class="hero-action" id="resetTwinBtn">
+        Reset
+      </button>
+      <button type="button" class="hero-action primary" id="runTwinBtn">
+        Run Digital Twin
+        <span>⚡</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Card 02: Twin Output -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <span class="card-kicker">
+          TWIN OUTPUT
+        </span>
+        <h3>Baseline vs Simulated Portfolio</h3>
+      </div>
+      <span class="card-index">DT02</span>
+    </div>
+
+    <div class="twin-metrics">
+      <div class="twin-metric">
+        <span>RECOVERY RATIO</span>
+        <div class="twin-metric-values">
+          <strong id="twinBaselineRecovery">--</strong>
+          <span>→</span>
+          <strong id="twinSimRecovery">--</strong>
+        </div>
+        <small id="twinRecoveryDelta">--</small>
+      </div>
+
+      <div class="twin-metric">
+        <span>RESIDUAL RISK SCORE</span>
+        <div class="twin-metric-values">
+          <strong id="twinBaselineRisk">--</strong>
+          <span>→</span>
+          <strong id="twinSimRisk">--</strong>
+        </div>
+        <small id="twinRiskDelta">--</small>
+      </div>
+
+      <div class="twin-metric">
+        <span>HEALTH INDEX</span>
+        <div class="twin-metric-values">
+          <strong id="twinBaselineHealth">--</strong>
+          <span>→</span>
+          <strong id="twinSimHealth">--</strong>
+        </div>
+        <small id="twinHealthDelta">--</small>
+      </div>
+
+      <div class="twin-metric">
+        <span>PORTFOLIO VALUE AT RISK</span>
+        <div class="twin-metric-values">
+          <strong id="twinBaselineVaR">--</strong>
+          <span>→</span>
+          <strong id="twinSimVaR">--</strong>
+        </div>
+        <small id="twinVaRDelta">--</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 03: Simulation Impact -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <span class="card-kicker">
+          SIMULATION IMPACT
+        </span>
+        <h3>What Changed?</h3>
+      </div>
+      <span class="card-index">DT03</span>
+    </div>
+
+    <div class="twin-impact-grid">
+      <div>
+        <span>LTV</span>
+        <strong id="twinImpactLtv">--</strong>
+      </div>
+      <div>
+        <span>RECOVERY</span>
+        <strong id="twinImpactRecovery">--</strong>
+      </div>
+      <div>
+        <span>RESIDUAL RISK</span>
+        <strong id="twinImpactRisk">--</strong>
+      </div>
+      <div>
+        <span>HEALTH INDEX</span>
+        <strong id="twinImpactHealth">--</strong>
+      </div>
+      <div>
+        <span>VALUE AT RISK</span>
+        <strong id="twinImpactVaR">--</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 04: Proactive Residual Intelligence -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <span class="card-kicker">
+          PROACTIVE RESIDUAL INTELLIGENCE
+        </span>
+        <h3>Signal → Decision → Action → Feedback</h3>
+      </div>
+      <span class="card-index">DT04</span>
+    </div>
+
+    <div class="twin-intelligence">
+      <div class="twin-intelligence-step">
+        <span class="twin-step-number">01</span>
+        <div>
+          <span>SIGNAL</span>
+          <strong id="twinSignal">Waiting for simulation</strong>
+          <p>Run a digital twin scenario to identify material changes from the baseline.</p>
+        </div>
+      </div>
+
+      <div class="twin-intelligence-step">
+        <span class="twin-step-number">02</span>
+        <div>
+          <span>DECISION BASIS</span>
+          <strong id="twinDecisionBasis">No decision generated</strong>
+          <p>The decision basis will use simulated portfolio metrics and available model evidence.</p>
+        </div>
+      </div>
+
+      <div class="twin-intelligence-step">
+        <span class="twin-step-number">03</span>
+        <div>
+          <span>MONITORING</span>
+          <strong id="twinMonitoring">Monitoring inactive</strong>
+          <p>Monitor the simulated metric that produced the strongest change.</p>
+        </div>
+      </div>
+
+      <div class="twin-intelligence-step">
+        <span class="twin-step-number">04</span>
+        <div>
+          <span>FEEDBACK</span>
+          <strong id="twinFeedback">Awaiting simulated outcome</strong>
+          <p>Compare future observed outcomes against the simulated scenario.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+
   <!-- ================= DETAIL DRAWER ================= -->
 
   <div
@@ -1830,11 +2136,13 @@
 
   <script src="js/api.js"></script>
   <script src="js/dashboard.js"></script>
+  
   <script src="js/explorer.js"></script>
   <script src="js/scenario.js"></script>
   <script src="js/chat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/finance.js"></script>
+  <script src="js/digital-twin.js"></script>
   <script src="js/app.js"></script>
 
 </body>

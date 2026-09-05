@@ -1,0 +1,521 @@
+/* =========================================================
+DIGITAL TWIN - IMPROVED LAYOUT STYLES
+Fixes vertical squishing, missing grid containers, and label wraps
+========================================================= */
+#view-digital-twin {
+  --dt-bg: #07100e;
+  --dt-panel: rgba(13, 25, 22, 0.88);
+  --dt-panel-2: rgba(18, 34, 30, 0.72);
+  --dt-border: rgba(255, 255, 255, 0.08);
+  --dt-border-bright: rgba(41, 201, 163, 0.30);
+  --dt-accent: #29c9a3;
+  --dt-accent-soft: rgba(41, 201, 163, 0.12);
+  --dt-blue: #4d8dff;
+  --dt-warning: #f2b84b;
+  --dt-danger: #ef5b6b;
+  --dt-text: #eef5f3;
+  --dt-muted: #82958f;
+  --dt-radius: 16px;
+  color: var(--dt-text);
+  position: relative;
+  box-sizing: border-box;
+  padding: 32px;
+  background: var(--dt-bg);
+  overflow-y: auto;
+  height: 100%;
+}
+
+#view-digital-twin * {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+#view-digital-twin .view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--dt-border);
+}
+
+#view-digital-twin .view-header h1 {
+  margin: 5px 0 8px;
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+#view-digital-twin .subtitle {
+  max-width: 720px;
+  color: var(--dt-muted);
+  line-height: 1.6;
+  font-size: 13.5px;
+  margin: 0;
+}
+
+/* =========================================================
+STATUS BADGE
+========================================================= */
+#view-digital-twin #digitalTwinStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 14px;
+  border: 1px solid var(--dt-border-bright);
+  border-radius: 999px;
+  background: var(--dt-accent-soft);
+  color: var(--dt-accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  white-space: nowrap;
+}
+
+#view-digital-twin #digitalTwinStatus .live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dt-accent);
+  box-shadow: 0 0 12px var(--dt-accent);
+  animation: dtPulse 1.7s infinite;
+}
+
+@keyframes dtPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .45; transform: scale(.75); }
+}
+
+/* =========================================================
+CARDS CONTAINER & STRUCTURE
+========================================================= */
+#view-digital-twin > .card {
+  position: relative;
+  margin-bottom: 24px;
+  padding: 28px;
+  background: linear-gradient(145deg, rgba(20, 38, 33, .92), rgba(7, 16, 14, .94));
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+#view-digital-twin > .card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 24px;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: var(--dt-accent);
+  opacity: .75;
+}
+
+#view-digital-twin .card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+#view-digital-twin .card-kicker {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--dt-accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+#view-digital-twin .card-header h3 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -.2px;
+}
+
+#view-digital-twin .card-index {
+  color: rgba(255,255,255,.28);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* =========================================================
+CONTROL GRID & CONTROLS
+========================================================= */
+#view-digital-twin .twin-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#view-digital-twin .twin-control {
+  padding: 20px;
+  border: 1px solid var(--dt-border);
+  border-radius: 12px;
+  background: rgba(255,255,255,.02);
+  transition: border-color .2s ease, transform .2s ease, background .2s ease;
+}
+
+#view-digital-twin .twin-control:hover {
+  border-color: rgba(41,201,163,.25);
+  background: rgba(41,201,163,.03);
+}
+
+#view-digital-twin .twin-control:first-child {
+  grid-column: 1 / -1;
+}
+
+#view-digital-twin .twin-control label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--dt-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+#view-digital-twin #twinAssetModel {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--dt-border);
+  border-radius: 9px;
+  outline: none;
+  background: #0b1714;
+  color: var(--dt-text);
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+#view-digital-twin #twinAssetModel:focus {
+  border-color: var(--dt-accent);
+}
+
+/* =========================================================
+SLIDER LABELS & RANGES
+========================================================= */
+#view-digital-twin .twin-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+#view-digital-twin .twin-label-row label {
+  margin-bottom: 0 !important;
+}
+
+#view-digital-twin .twin-label-row strong {
+  color: var(--dt-accent);
+  font-size: 14px;
+  font-family: monospace;
+}
+
+#view-digital-twin input[type="range"] {
+  width: 100%;
+  margin-top: 14px;
+  appearance: none;
+  height: 6px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  background: rgba(255,255,255,.10);
+}
+
+#view-digital-twin input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--dt-accent);
+  border: 3px solid #0a1714;
+  box-shadow: 0 0 0 1px var(--dt-accent);
+  cursor: grab;
+  transition: transform .1s ease;
+}
+
+#view-digital-twin input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* =========================================================
+PRESETS & ACTIONS BAR
+========================================================= */
+#view-digital-twin .twin-presets {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--dt-border);
+}
+
+#view-digital-twin .twin-preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+#view-digital-twin .twin-preset {
+  padding: 9px 14px;
+  border: 1px solid var(--dt-border);
+  border-radius: 7px;
+  background: rgba(255,255,255,.025);
+  color: var(--dt-muted);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: .8px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+#view-digital-twin .twin-preset:hover {
+  color: var(--dt-text);
+  border-color: rgba(41,201,163,.35);
+}
+
+#view-digital-twin .twin-preset.active {
+  color: var(--dt-accent);
+  border-color: rgba(41,201,163,.5);
+  background: var(--dt-accent-soft);
+}
+
+#view-digital-twin .twin-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+#view-digital-twin .twin-actions button {
+  min-width: 140px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--dt-border);
+  background: rgba(255,255,255,.035);
+  color: var(--dt-text);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .8px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+#view-digital-twin .twin-actions button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.2);
+}
+
+#view-digital-twin #runTwinBtn {
+  border-color: var(--dt-accent);
+  background: var(--dt-accent);
+  color: #06120f;
+  box-shadow: 0 8px 25px rgba(41,201,163,.18);
+}
+
+#view-digital-twin #runTwinBtn:hover {
+  box-shadow: 0 10px 30px rgba(41,201,163,.30);
+  background: #2fe0b7;
+}
+
+#view-digital-twin button:disabled {
+  opacity: .55;
+  cursor: wait;
+  transform: none !important;
+}
+
+/* =========================================================
+METRIC GRID (OUTPUTS)
+========================================================= */
+#view-digital-twin .twin-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#view-digital-twin .twin-metric {
+  padding: 20px;
+  min-height: 125px;
+  border: 1px solid var(--dt-border);
+  border-radius: 12px;
+  background: rgba(255,255,255,.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#view-digital-twin .twin-metric > span {
+  display: block;
+  color: var(--dt-muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+#view-digital-twin .twin-metric-values {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+#view-digital-twin .twin-metric-values strong {
+  font-size: 26px;
+  letter-spacing: -.7px;
+}
+
+#view-digital-twin .twin-metric-values span {
+  color: var(--dt-muted);
+  font-size: 15px;
+}
+
+#view-digital-twin .twin-metric small {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: var(--dt-accent-soft);
+  color: var(--dt-accent);
+  font-size: 9.5px;
+  font-weight: 800;
+}
+
+/* =========================================================
+IMPACT GRID
+========================================================= */
+#view-digital-twin .twin-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+#view-digital-twin .twin-impact-grid > div {
+  padding: 16px;
+  border: 1px solid var(--dt-border);
+  border-radius: 10px;
+  background: rgba(255,255,255,.02);
+}
+
+#view-digital-twin .twin-impact-grid span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--dt-muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+#view-digital-twin .twin-impact-grid strong {
+  font-size: 17px;
+  letter-spacing: -.3px;
+}
+
+/* =========================================================
+INTELLIGENCE GRID
+========================================================= */
+#view-digital-twin .twin-intelligence {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+#view-digital-twin .twin-intelligence-step {
+  position: relative;
+  min-height: 200px;
+  padding: 22px;
+  border: 1px solid var(--dt-border);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(41,201,163,.04), rgba(255,255,255,.01));
+  display: flex;
+  flex-direction: column;
+}
+
+#view-digital-twin .twin-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(41,201,163,.3);
+  border-radius: 50%;
+  color: var(--dt-accent);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+#view-digital-twin .twin-intelligence-step > div > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--dt-muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+#view-digital-twin .twin-intelligence-step strong {
+  display: block;
+  min-height: 40px;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+#view-digital-twin .twin-intelligence-step p {
+  margin: 10px 0 0;
+  color: var(--dt-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+RESPONSIVE BREAKPOINTS
+========================================================= */
+@media (max-width: 1100px) {
+  #view-digital-twin .twin-impact-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  #view-digital-twin .twin-controls {
+    grid-template-columns: 1fr;
+  }
+  #view-digital-twin .twin-control:first-child {
+    grid-column: auto;
+  }
+  #view-digital-twin .twin-intelligence {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #view-digital-twin .twin-impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  #view-digital-twin {
+    padding: 16px;
+  }
+  #view-digital-twin .view-header {
+    flex-direction: column;
+  }
+  #view-digital-twin .twin-metrics {
+    grid-template-columns: 1fr;
+  }
+  #view-digital-twin .twin-intelligence {
+    grid-template-columns: 1fr;
+  }
+  #view-digital-twin .twin-impact-grid {
+    grid-template-columns: 1fr;
+  }
+  #view-digital-twin .twin-actions {
+    flex-direction: column;
+  }
+  #view-digital-twin .twin-actions button {
+    width: 100%;
+  }
+}

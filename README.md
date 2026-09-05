@@ -1,4 +1,4 @@
-# FinLe - Lending Intelligence & Finance
+# epic8 - Lending Intelligence & Finance
 # Dynamic Residual Pricing & Lending Strategy Engine
 
 Full-stack deliverable for the "Disruption Decoded" Analytics Case Study.
