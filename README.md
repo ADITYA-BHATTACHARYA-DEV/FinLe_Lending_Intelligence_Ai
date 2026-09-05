@@ -20,6 +20,13 @@ project/
     └── js/ (api.js, dashboard.js, explorer.js, scenario.js, chat.js, app.js)
 ```
 
+
+
+
+
+
+<img width="557" height="992" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/f1eca475-5bce-41e4-a3ed-5beade906fda" />
+
 ## What's implemented
 
 The training pipeline (`backend/models/train_pipeline.py`) implements the full
@@ -50,6 +57,7 @@ LAYER 5  Constrained Lending Optimizer    scipy SLSQP: maximize profit s.t. LTV/
 LAYER 6  Explainable AI & Copilot         CatBoost + TreeSHAP -> Ollama (llama3.1) narrative
 ```
 
+<img width="2500" height="1382" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/96e3a081-3de0-4456-897b-3d760b3d05af" />
 
 
 <img width="1906" height="948" alt="Screenshot 2026-09-05 172817" src="https://github.com/user-attachments/assets/06c13763-6876-4700-9ee3-325bd7de502f" />
